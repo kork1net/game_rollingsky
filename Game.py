@@ -11,7 +11,7 @@ env = Enviroment(State())
 def main():
     run = True
     global ball_x
-
+    # comment
     while (run):
         events = pygame.event.get()
         for event in events:
