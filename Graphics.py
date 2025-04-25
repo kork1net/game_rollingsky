@@ -21,10 +21,13 @@ class Graphics:
         self.main_surf = pygame.Surface((WIDTH, HEIGHT))
         pygame.display.set_caption('Rolling Sky!')
 
-    def draw(self, state):
+    def draw(self, env):
         self.main_surf.fill((173, 216, 230))
         self.screen.blit(self.main_surf, (0, 0))
-        self.draw_tiles(state)
+        self.draw_tiles(env.state)
+        env.player.draw(self.screen)
+
+    
 
     def draw_tiles(self, state):
         board = state.board
@@ -51,5 +54,5 @@ class Graphics:
         return x, y
 
         
-    def __call__(self, state):
-        self.draw(state)
+    def __call__(self, env):
+        self.draw(env)
