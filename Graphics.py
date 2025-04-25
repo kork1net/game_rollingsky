@@ -27,8 +27,6 @@ class Graphics:
         self.draw_tiles(env.state)
         env.player.draw(self.screen)
 
-    
-
     def draw_tiles(self, state):
         board = state.board
         for row in range(board.shape[0]):
