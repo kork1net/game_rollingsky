@@ -12,7 +12,7 @@ player = Human_agent()
 
 def main():
     run = True
-    # comment
+    # Hi
     while (run):
         pygame.event.pump()
         events = pygame.event.get()
