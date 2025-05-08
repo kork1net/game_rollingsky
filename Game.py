@@ -10,15 +10,18 @@ graphics = Graphics()
 env = Enviroment(State())
 player = Human_agent()
 
+text_font = pygame.font.SysFont("Arial", 30)
+
 def main():
     run = True
-    # Hi
     while (run):
         pygame.event.pump()
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
                 run = False
+        
+        graphics.draw_text("Hello", text_font, (0,0,0), 0, 0)
 
         action = player.action(events)
         env.move(action)

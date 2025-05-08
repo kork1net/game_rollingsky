@@ -12,6 +12,5 @@ class State:
         board = np.zeros((12, 8))
         for x in range(board.shape[0]):
             board[x, 2:6] = 1
-
         return board
   

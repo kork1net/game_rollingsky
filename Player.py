@@ -12,13 +12,12 @@ class Player (pygame.sprite.Sprite):
         self.x = 140
         self.tile = 40
             
-
     def move (self, action):
         self.col += action
 
     def draw (self, surface):
         y = self.tile * self.row + self.tile / 2
-        self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.35
+        self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.4
         self.rect.center = (self.x, y)
         surface.blit(self.image, self.rect)
 
