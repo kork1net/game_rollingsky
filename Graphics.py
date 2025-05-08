@@ -24,11 +24,6 @@ class Graphics:
         self.main_surf = pygame.Surface((WIDTH, HEIGHT))
         pygame.display.set_caption('Rolling Sky!')
 
-    def draw_text(self, text, font, text_col, x, y):
-        img = font.render(text, True, text_col)
-        self.main_surf.blit(img, (x,y))
-        self.screen.blit(self.main_surf, (0, 0))
-
     def draw(self, env):
         self.main_surf.fill((173, 216, 230))
         self.screen.blit(self.main_surf, (0, 0))
@@ -53,7 +48,11 @@ class Graphics:
         if current == 3:
             self.main_surf.blit(boost_img, (x,y))
         self.screen.blit(self.main_surf, (0, 0))
-        
+
+    def draw_text(self, text, font, text_col, x, y):
+        img = font.render(text, True, text_col)
+        #self.main_surf.blit(img, (x,y))
+        self.screen.blit(img, (x,y))
 
     def calc_pos(self, row_col):
         row, col = row_col

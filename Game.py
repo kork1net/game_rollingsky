@@ -21,11 +21,13 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
         
-        graphics.draw_text("Hello", text_font, (0,0,0), 0, 0)
+        
 
         action = player.action(events)
         env.move(action)
         graphics(env)
+
+        graphics.draw_text("Hello", text_font, (0,0,0), 0, 0)
 
         pygame.display.update()
         clock.tick(FPS)
