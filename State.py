@@ -9,7 +9,7 @@ class State:
         self.end_of_game = 0
 
     def init_board (self):
-        board = np.zeros((24, 16))
+        board = np.zeros((18, 12))
         for x in range(board.shape[0]):
             board[x, 2:6] = 1
         return board

@@ -7,7 +7,7 @@ class Player (pygame.sprite.Sprite):
 
         self.images = [pygame.image.load("img/Ball.png"), pygame.image.load("img/Ball2.png"), pygame.image.load("img/Ball3.png"), pygame.image.load("img/Ball4.png")]
         for i in range(len(self.images)):
-            self.images[i] = pygame.transform.scale(self.images[i],(60, 60))
+            self.images[i] = pygame.transform.scale(self.images[i],(45, 45))
 
         self.balls_index = 0
 
@@ -15,7 +15,7 @@ class Player (pygame.sprite.Sprite):
         self.col = 4
         self.row = 10
         self.x = 140
-        self.tile = 80
+        self.tile = 60
         self.animation = 0
         self.animation_speed = 8
             
