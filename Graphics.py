@@ -18,8 +18,21 @@ boost_img = pygame.transform.scale(boost_img,(60, 60))
 bonus500_img = pygame.image.load("img/Bonus500.png")
 bonus500_img = pygame.transform.scale(bonus500_img,(60, 60))
 
+bonus3000_img = pygame.image.load("img/Bonus3000.png")
+bonus3000_img = pygame.transform.scale(bonus3000_img,(60, 60))
+
+star_img = pygame.image.load("img/Star.png")
+star_img = pygame.transform.scale(star_img,(60, 60))
+
+slime_img = pygame.image.load("img/Slime.png")
+slime_img = pygame.transform.scale(slime_img,(60, 60))
+
+jumper_img = pygame.image.load("img/jumper.png")
+jumper_img = pygame.transform.scale(jumper_img,(60, 60))
+
 ball_img = pygame.image.load("img/Ball.png")
 ball_img = pygame.transform.scale(ball_img,(45, 45))
+
 
 background_img = pygame.image.load("img/backgroundimg.png")
 background_img = pygame.transform.scale(background_img,(480, 720))
@@ -54,8 +67,17 @@ class Graphics:
             self.main_surf.blit(spike_img, (x, y))
         if current == 3:
             self.main_surf.blit(boost_img, (x,y))
+        if current == 4:
+            self.main_surf.blit(slime_img, (x,y))
+        if current == 5:
+            self.main_surf.blit(jumper_img, (x,y))
         if current == 100:
             self.main_surf.blit(bonus500_img, (x,y))
+        if current == 101:
+            self.main_surf.blit(bonus3000_img, (x,y))
+        if current == 200:
+            self.main_surf.blit(tile_img, (x, y))
+            self.main_surf.blit(star_img, (x,y))
 
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
