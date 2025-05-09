@@ -22,7 +22,11 @@ class Player (pygame.sprite.Sprite):
         self.jumping = False
             
     def move (self, action):
-        self.col += action
+        if (action == -1 and self.col != 0):
+            self.col += action
+        if (action == 1 and self.col != 7):
+            self.col += action
+        
         
 
     def draw (self, surface):

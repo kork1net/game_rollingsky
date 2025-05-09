@@ -205,7 +205,7 @@ class Enviroment:
             self.state.board[0, col] = 100
 
     def add_bonus3000(self):
-        delay = random.randint(5, 20000)
+        delay = random.randint(5, 24000)
         if self.step % delay == 0:
             col = random.randint(self.wait, self.wait + 3)
             self.state.board[0, col] = 101
