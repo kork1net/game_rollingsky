@@ -9,8 +9,10 @@ clock = pygame.time.Clock()
 graphics = Graphics()
 env = Enviroment(State())
 player = Human_agent()
+IntScore = 1
+StringScore = str(IntScore)
 
-text_font = pygame.font.SysFont("Arial", 30)
+text_font = pygame.font.SysFont("verdana", 90)
 
 def main():
     run = True
@@ -20,14 +22,11 @@ def main():
         for event in events:
             if event.type == pygame.QUIT:
                 run = False
-        
-        
-
         action = player.action(events)
         env.move(action)
         graphics(env)
 
-        graphics.draw_text("Hello", text_font, (0,0,0), 0, 0)
+        graphics.draw_text(StringScore, text_font, ('white'), 20, 0)
 
         pygame.display.update()
         clock.tick(FPS)

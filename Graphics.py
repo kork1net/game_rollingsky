@@ -4,19 +4,19 @@ ball_x = 137
 speed = 3
 ball_y = 400
 FPS = 60
-WIDTH, HEIGHT = 320, 480
+WIDTH, HEIGHT = 640, 960
 
 tile_img = pygame.image.load("img/Tile.png")
-tile_img = pygame.transform.scale(tile_img,(40, 40))
+tile_img = pygame.transform.scale(tile_img,(80, 80))
 
 spike_img = pygame.image.load("img/Spike.png")
-spike_img = pygame.transform.scale(spike_img,(40, 40))
+spike_img = pygame.transform.scale(spike_img,(80, 80))
 
 boost_img = pygame.image.load("img/Boost.png")
-boost_img = pygame.transform.scale(boost_img,(40, 40))
+boost_img = pygame.transform.scale(boost_img,(80, 80))
 
 ball_img = pygame.image.load("img/Ball.png")
-ball_img = pygame.transform.scale(ball_img,(30, 30))
+ball_img = pygame.transform.scale(ball_img,(60, 60))
 
 class Graphics:
     def __init__(self) -> None:
@@ -24,8 +24,9 @@ class Graphics:
         self.main_surf = pygame.Surface((WIDTH, HEIGHT))
         pygame.display.set_caption('Rolling Sky!')
 
+
     def draw(self, env):
-        self.main_surf.fill((173, 216, 230))
+        self.main_surf.fill((114, 151, 181))
         self.screen.blit(self.main_surf, (0, 0))
         self.draw_tiles(env.state)
         env.player.draw(self.screen)
@@ -51,13 +52,12 @@ class Graphics:
 
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
-        #self.main_surf.blit(img, (x,y))
         self.screen.blit(img, (x,y))
 
     def calc_pos(self, row_col):
         row, col = row_col
-        x = col * 40
-        y = row * 40
+        x = col * 80
+        y = row * 80
         return x, y
 
         

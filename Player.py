@@ -4,22 +4,36 @@ class Player (pygame.sprite.Sprite):
 
     def __init__(self) -> None:
         super().__init__()
-        self.image = pygame.image.load("img/Ball.png")
-        self.image = pygame.transform.scale(self.image,(30, 30))
-        self.rect = self.image.get_rect()
+
+        self.images = [pygame.image.load("img/Ball.png"), pygame.image.load("img/Ball2.png"), pygame.image.load("img/Ball3.png"), pygame.image.load("img/Ball4.png")]
+        for i in range(len(self.images)):
+            self.images[i] = pygame.transform.scale(self.images[i],(60, 60))
+
+        self.balls_index = 0
+
+        self.rect = self.images[0].get_rect()
         self.col = 4
         self.row = 10
         self.x = 140
-        self.tile = 40
+        self.tile = 80
+        self.animation = 0
+        self.animation_speed = 8
             
     def move (self, action):
         self.col += action
+        
 
     def draw (self, surface):
         y = self.tile * self.row + self.tile / 2
-        self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.4
+        self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.6
         self.rect.center = (self.x, y)
-        surface.blit(self.image, self.rect)
+        surface.blit(self.images[self.balls_index], self.rect)
+        self.animation += 1
+        if self.animation >= self.animation_speed:
+            self.balls_index += 1
+            if self.balls_index == 4:
+                self.balls_index = 0
+            self.animation = 0
 
     def update(self, action): # for sprite Group
         self.move(action)
