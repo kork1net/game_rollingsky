@@ -59,13 +59,13 @@ class Enviroment:
 
         if (self.score < 500):
             self.spike_frequency = 25
-        if (100 < self.score < 1500):
+        if (100 < self.score < 1000):
             self.spike_frequency = 20
-        if (1500 < self.score < 4000):
+        if (1000 < self.score < 2000):
             self.spike_frequency = 15
-        if (4000 < self.score < 5500):
+        if (2000 < self.score < 3000):
             self.spike_frequency = 10
-        if (5500 < self.score):
+        if (3000 < self.score):
             self.spike_frequency = 2
     
 
