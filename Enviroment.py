@@ -9,6 +9,7 @@ death = pygame.mixer.Sound("sfx/die.mp3")
 bonus_sound = pygame.mixer.Sound("sfx/bonus.mp3")
 slime_sound = pygame.mixer.Sound("sfx/slimes.mp3")
 jump_sound = pygame.mixer.Sound("sfx/jumps.mp3")
+start_sound = pygame.mixer.Sound("sfx/starts.mp3")
 
 class Enviroment:
     def __init__(self, state, speed = 10):
@@ -41,11 +42,14 @@ class Enviroment:
         self.touched_boost2 = False
 
         self.jumpduration = 35
-        self.spike_frequency = 35 # lower -> more spikes
+        self.spike_frequency = 25 # lower -> more spikes
 
         self.score = 0
         self.score_speed = 10
         self.game_over = False
+    
+    def play_start_sound(self):
+        start_sound.play()
         
 
     def move (self, action):
@@ -54,12 +58,16 @@ class Enviroment:
         self.step += 1
 
         if (self.score < 500):
-            self.spike_frequency = 35
-        if (100 < self.score < 2000):
-            self.spike_frequency = 30
-        if (self.score > 2000):
             self.spike_frequency = 25
-
+        if (100 < self.score < 1500):
+            self.spike_frequency = 20
+        if (1500 < self.score < 4000):
+            self.spike_frequency = 15
+        if (4000 < self.score < 5500):
+            self.spike_frequency = 10
+        if (5500 < self.score):
+            self.spike_frequency = 2
+    
 
         self.boost_counter += 1
         self.slow_counter += 1
@@ -105,10 +113,12 @@ class Enviroment:
         if board[row, col] == 0:
             if (not self.jumping):
                 self.game_over = True # stop game
+                self.player.broken = True
 
         elif board[row, col] == 2:
             if (not self.jumping):
                 self.game_over = True # stop game
+                self.player.broken = True
 
         elif board[row, col] == 3:
             if (not self.jumping):
@@ -180,11 +190,25 @@ class Enviroment:
         else:
             self.played_bonus_sound = False
 
+    def _is_spike_safe(self, col):
+        board = self.state.board
+
+        if col - 2 >= self.wait:
+            if board[1, col - 1] == 2 or board[2, col-2] == 2:
+                return False
+
+        if col + 2 <= self.wait + 3:
+            if board[1, col + 1] == 2 or board[2, col+2] == 2:
+                return False
+        
+        return True
+
     def add_spikes(self):
-        delay = random.randint(5, self.spike_frequency)
+        delay = random.randint(1, self.spike_frequency)
         if self.step % delay == 0:
             col = random.randint(self.wait, self.wait + 3)
-            self.state.board[0, col] = 2
+            if self._is_spike_safe(col):
+                self.state.board[0, col] = 2
             
     def add_boost(self):
         delay = random.randint(5, 300)
@@ -210,7 +234,10 @@ class Enviroment:
             col = random.randint(self.wait, self.wait + 3)
             self.state.board[0, col] = 101
 
-
+    def reset(self):
+        self.__init__(self.state) 
+        self.state.board = self.state.init_board()
+        self.player.broken = False
 
     def roll(self):
 
