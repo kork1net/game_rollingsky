@@ -88,7 +88,7 @@ class Enviroment:
 
         if (self.boost and self.boost_counter < 200):
             self.jumpduration = 20
-            self.speed = 5
+            self.speed = 6
             self.score_speed = 5
             self.player.animation_speed = 3
 
