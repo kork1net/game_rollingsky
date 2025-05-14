@@ -10,9 +10,9 @@ graphics = Graphics()
 env = Enviroment(State())
 player = Human_agent()
 
-text_font = pygame.font.SysFont("pressstart2pregular", 30)
-death_font = pygame.font.SysFont("pressstart2pregular", 45)
-restart_font = pygame.font.SysFont("pressstart2pregular", 25)
+text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
+death_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 45)
+restart_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
 
 pygame.mixer.music.load('sfx/background.mp3')
 pygame.mixer.music.play(-1) 
