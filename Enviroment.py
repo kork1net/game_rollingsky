@@ -40,6 +40,7 @@ class Enviroment:
 
         self.touched_boost = False
         self.touched_boost2 = False
+        self.touched_boost3 = False
 
         self.jumpduration = 35
         self.spike_frequency = 25 # lower -> more spikes
@@ -136,19 +137,25 @@ class Enviroment:
             self.jumping = True
             self.jumping_counter = 0
 
-        elif board[row, col] == 100:
+        elif board[row, col] == 6:
             if not self.jumping and not self.touched_boost:
                 self.score += 200
             self.touched_boost = True
 
-        elif board[row, col] == 101:
+        elif board[row, col] == 7:
             if not self.jumping and not self.touched_boost2:
-                self.score += 3000
+                self.score += 1000
             self.touched_boost2 = True
+        
+        elif board[row, col] == 8:
+            if not self.jumping and not self.touched_boost3:
+                self.score += 3000
+            self.touched_boost3 = True
 
         else:
             self.touched_boost = False
             self.touched_boost2 = False
+            self.touched_boost3 = False
 
     def play_sound(self, col, row, board):
         if board[row, col] == 0 or board[row, col] == 2:
@@ -182,7 +189,7 @@ class Enviroment:
         else:
             self.played_jump_sound = False
         
-        if board[row, col] == 100 or board[row, col] == 101: # bonus
+        if board[row, col] == 6 or board[row, col] == 7 or board[row, col] == 8: # bonus
             if (not self.jumping):
                 if not self.played_bonus_sound:
                     bonus_sound.play()
@@ -222,17 +229,23 @@ class Enviroment:
             col = random.randint(self.wait, self.wait + 3)
             self.state.board[0, col] = 4
 
-    def add_bonus500(self):
+    def add_bonus200(self):
         delay = random.randint(5, 1000)
         if self.step % delay == 0:
             col = random.randint(self.wait, self.wait + 3)
-            self.state.board[0, col] = 100
+            self.state.board[0, col] = 6
 
-    def add_bonus3000(self):
-        delay = random.randint(5, 35000)
+    def add_bonus1000(self):
+        delay = random.randint(5, 21000)
         if self.step % delay == 0:
             col = random.randint(self.wait, self.wait + 3)
-            self.state.board[0, col] = 101
+            self.state.board[0, col] = 7
+
+    def add_bonus3000(self):
+        delay = random.randint(5, 38500)
+        if self.step % delay == 0:
+            col = random.randint(self.wait, self.wait + 3)
+            self.state.board[0, col] = 8
 
     def reset(self):
         self.__init__(self.state) 
@@ -254,15 +267,16 @@ class Enviroment:
 
         if self.height_left == 0:
             if(hole == 1):
-                self.state.board[0, self.wait:self.wait + 4] = 0
-                self.state.board[1, random.randint(self.wait, self.wait + 3)] = 5
+                jumper_tile = random.randint(self.wait, self.wait + 3) 
+                self.state.board[0, self.wait:self.wait + 4] = 0 # empty row
+                self.state.board[1, jumper_tile] = 5 # place a jumper
+
+                # ensure there is a tile (not an obby) before a jumper:
+                self.state.board[2, jumper_tile] = 1 
+                self.state.board[3, jumper_tile] = 1 
             else:
                 self.state.board[0, self.wait:self.wait + 4] = 1
-                self.add_spikes()
-                self.add_boost()
-                self.add_slime()
-                self.add_bonus500()
-                self.add_bonus3000()
+                self.add_all()
 
             new_wait = self.wait + self.direction
 
@@ -274,10 +288,13 @@ class Enviroment:
             self.height_left = random.randint(4, 10)
             
         else:
-            self.add_spikes()
-            self.add_boost()
-            self.add_slime()
-            self.add_bonus500()
-            self.add_bonus3000()
+            self.add_all()
 
-        
+    def add_all(self):
+        self.add_spikes()
+        self.add_boost()
+        self.add_slime()
+        self.add_bonus200()
+        self.add_bonus1000()
+        self.add_bonus3000()
+                

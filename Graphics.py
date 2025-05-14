@@ -15,8 +15,11 @@ spike_img = pygame.transform.scale(spike_img,(60, 60))
 boost_img = pygame.image.load("img/Boost.png")
 boost_img = pygame.transform.scale(boost_img,(60, 60))
 
-bonus500_img = pygame.image.load("img/Bonus500.png")
-bonus500_img = pygame.transform.scale(bonus500_img,(60, 60))
+bonus200_img = pygame.image.load("img/Bonus500.png")
+bonus200_img = pygame.transform.scale(bonus200_img,(60, 60))
+
+bonus1000_img = pygame.image.load("img/Bonus1000.png")
+bonus1000_img = pygame.transform.scale(bonus1000_img,(60, 60))
 
 bonus3000_img = pygame.image.load("img/Bonus3000.png")
 bonus3000_img = pygame.transform.scale(bonus3000_img,(60, 60))
@@ -100,11 +103,13 @@ class Graphics:
             self.main_surf.blit(slime_img, (x,y))
         if current == 5:
             self.main_surf.blit(jumper_img, (x,y))
-        if current == 100:
-            self.main_surf.blit(bonus500_img, (x,y))
-        if current == 101:
+        if current == 6:
+            self.main_surf.blit(bonus200_img, (x,y))
+        if current == 7:
+            self.main_surf.blit(bonus1000_img, (x,y))
+        if current == 8:
             self.main_surf.blit(bonus3000_img, (x,y))
-        if current == 200:
+        if current == 9: # easter egg
             self.main_surf.blit(tile_img, (x, y))
             self.main_surf.blit(star_img, (x,y))
 
