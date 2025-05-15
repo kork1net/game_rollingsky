@@ -273,7 +273,7 @@ class Enviroment:
 
                 # ensure there is a tile (not an obby) before a jumper:
                 self.state.board[2, jumper_tile] = 1 
-                self.state.board[3, jumper_tile] = 1 
+                
             else:
                 self.state.board[0, self.wait:self.wait + 4] = 1
                 self.add_all()
