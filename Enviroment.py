@@ -13,10 +13,12 @@ start_sound = pygame.mixer.Sound("sfx/starts.mp3")
 
 class Enviroment:
     def __init__(self, state, speed = 10):
+
         self.state : State = state
         self.player = Player()
-        self.step = 0
-        self.speed = speed
+
+        self.step = 0 # distance of the player
+        self.speed = speed # speed of the player
         self.wait = 2
         self.direction = random.choice([-1, 1])
         self.height_left = random.randint(2, 20)
@@ -51,7 +53,6 @@ class Enviroment:
     
     def play_start_sound(self):
         start_sound.play()
-        
 
     def move (self, action):
         self.player.move(action)
@@ -271,8 +272,9 @@ class Enviroment:
                 self.state.board[0, self.wait:self.wait + 4] = 0 # empty row
                 self.state.board[1, jumper_tile] = 5 # place a jumper
 
-                # ensure there is a tile (not an obby) before a jumper:
-                self.state.board[2, jumper_tile] = 1 
+                # ensure there is not a spike before a jumper:
+                if self.state.board[2, jumper_tile] == 2:
+                    self.state.board[2, jumper_tile] = 1 
                 
             else:
                 self.state.board[0, self.wait:self.wait + 4] = 1
