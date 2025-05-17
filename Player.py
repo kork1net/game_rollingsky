@@ -31,7 +31,6 @@ class Player (pygame.sprite.Sprite):
         if (action == 1 and self.col != 7):
             self.col += action
         
-        
 
     def draw (self, surface):
         y = self.tile * self.row + self.tile / 2
@@ -57,9 +56,4 @@ class Player (pygame.sprite.Sprite):
             self.balls_index = 4
             self.x -= 60
             y -= 60
-
-        
-
     
-    def update(self, action): # for sprite Group
-        self.move(action)
