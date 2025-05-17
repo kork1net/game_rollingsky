@@ -43,9 +43,11 @@ def main():
 
         if start:
             graphics.main_img_call(True)
+            
             if not env.game_over:
                 action = player.action(events)
                 env.move(action)
+
             if env.game_over:
 
                 graphics.draw_text("Game Over!", death_font, ('red'), 20, 305)
