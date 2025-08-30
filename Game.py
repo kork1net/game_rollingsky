@@ -53,14 +53,14 @@ def main():
                 graphics.draw_text("Game Over!", death_font, ('red'), 20, 305)
                 graphics.draw_text("Game Over!", death_font, ('white'), 20, 300)
 
-                graphics.draw_text("Press r to restart", restart_font, ('red'), 20, 373)
-                graphics.draw_text("Press r to restart", restart_font, ('white'), 20, 370)
+                graphics.draw_text("[space] to restart", restart_font, ('red'), 10, 373)
+                graphics.draw_text("[space] to restart", restart_font, ('white'), 10, 370)
 
                 pygame.mixer.music.stop()
 
                 for event in events:
                     if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_r:
+                        if event.key == pygame.K_SPACE:
                             env.reset()
                             pygame.mixer.music.play(-1)
                             env.play_start_sound()

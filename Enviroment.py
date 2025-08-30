@@ -16,6 +16,9 @@ class Enviroment:
 
         self.state : State = state
         self.player = Player()
+        
+        self.tile_size = 60
+        self.scroll_offset = 0
 
         self.step = 0 # distance of the player
         self.speed = speed # speed of the player
@@ -60,15 +63,15 @@ class Enviroment:
         self.step += 1
 
         if (self.score < 500):
-            self.spike_frequency = 25
-        if (100 < self.score < 1000):
             self.spike_frequency = 20
-        if (1000 < self.score < 2000):
+        if (100 < self.score < 1000):
             self.spike_frequency = 15
-        if (2000 < self.score < 3000):
+        if (1000 < self.score < 2000):
             self.spike_frequency = 10
+        if (2000 < self.score < 3000):
+            self.spike_frequency = 5
         if (3000 < self.score):
-            self.spike_frequency = 2
+            self.spike_frequency = 1
     
 
         self.boost_counter += 1
@@ -83,33 +86,40 @@ class Enviroment:
             self.jumping_counter = 0
             self.player.jumping = False
 
-        self.speed = 10
+        self.speed = 6
         self.jumpduration = 35
         self.score_speed = 10
         self.player.animation_speed = 8
 
         if (self.boost and self.boost_counter < 200):
             self.jumpduration = 20
-            self.speed = 6
+            self.speed = 10
             self.score_speed = 5
             self.player.animation_speed = 3
 
         elif (self.slow and self.slow_counter < 200):
             self.jumpduration = 50
-            self.speed = 30
+            self.speed = 3
             self.score_speed = 40
             self.player.animation_speed = 30
 
-        if self.step % self.speed == 0:
+        self.scroll_offset += self.speed   #######################################################
+
+        if (self.scroll_offset >= self.tile_size):
+            self.scroll_offset = 0
             self.roll()
 
         if (self.step % self.score_speed == 0):
             self.score += 1 
 
+
     def hit(self):
+
+        board = self.state.board
+                
         col = self.player.col
         row = self.player.row
-        board = self.state.board
+
         self.play_sound(col, row, board)
 
         if board[row, col] == 0:
@@ -252,6 +262,7 @@ class Enviroment:
         self.__init__(self.state) 
         self.state.board = self.state.init_board()
         self.player.broken = False
+    
 
     def roll(self):
 

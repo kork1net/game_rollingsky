@@ -50,11 +50,12 @@ class Graphics:
 
         self.main_scale = 1.0
         self.scale_direction = 1
+
         
 
     def draw(self, env):
         self.main_surf.blit(background_img, (0,0))
-        self.draw_tiles(env.state)
+        self.draw_tiles(env.state, env.scroll_offset)
         env.player.draw(self.main_surf)
         
         self.screen.blit(self.main_surf, (0, 0))
@@ -82,15 +83,15 @@ class Graphics:
         if self.main_scale >= max_scale or self.main_scale <= min_scale:
             self.scale_direction *= -1
     
-    def draw_tiles(self, state):
+    def draw_tiles(self, state, scroll_offset=0):
         board = state.board
         for row in range(board.shape[0]):
             for col in range(board.shape[1]):
                 if board[row,col] != 0:
-                    self.draw_tile((row, col), board[row, col])
+                    self.draw_tile((row, col), board[row, col], scroll_offset)
         
-    def draw_tile(self, row_col, current):
-        x, y = self.calc_pos(row_col)
+    def draw_tile(self, row_col, current, scroll_offset=0):
+        x, y = self.calc_pos(row_col, scroll_offset)
         
         if current == 1:
             self.main_surf.blit(tile_img, (x, y))
@@ -117,10 +118,10 @@ class Graphics:
         img = font.render(text, True, text_col)
         self.screen.blit(img, (x,y))
 
-    def calc_pos(self, row_col):
+    def calc_pos(self, row_col, scroll_offset=0):
         row, col = row_col
         x = col * 60
-        y = row * 60
+        y = row * 60 + scroll_offset
         return x, y
 
         

@@ -31,10 +31,10 @@ class Player (pygame.sprite.Sprite):
         if (action == 1 and self.col != 7):
             self.col += action
         
-
+        
     def draw (self, surface):
         y = self.tile * self.row + self.tile / 2
-        self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.9
+        self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.7
         self.rect.center = (self.x, y)
         
         if self.jumping == True:
@@ -54,6 +54,4 @@ class Player (pygame.sprite.Sprite):
                 self.animation = 0
         else:
             self.balls_index = 4
-            self.x -= 60
-            y -= 60
-    
+            self.x -= 10   
