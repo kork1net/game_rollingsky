@@ -282,10 +282,6 @@ class Enviroment:
                 jumper_tile = random.randint(self.wait, self.wait + 3) 
                 self.state.board[0, self.wait:self.wait + 4] = 0 # empty row
                 self.state.board[1, jumper_tile] = 5 # place a jumper
-
-                # ensure there is not a spike before a jumper:
-                if self.state.board[2, jumper_tile] == 2:
-                    self.state.board[2, jumper_tile] = 1 
                 
             else:
                 self.state.board[0, self.wait:self.wait + 4] = 1
@@ -299,6 +295,11 @@ class Enviroment:
                 self.direction *= -1
 
             self.height_left = random.randint(4, 10)
+
+            # ensure there is not a spike before a jumper:
+            if(hole == 1):
+                if self.state.board[2, jumper_tile] == 2:
+                    self.state.board[2, jumper_tile] = 1 
             
         else:
             self.add_all()
