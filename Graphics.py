@@ -6,6 +6,9 @@ ball_y = 400
 FPS = 60
 WIDTH, HEIGHT = 480, 720
 
+upper_img = pygame.image.load("img/Upper.png")
+upper_img = pygame.transform.scale(upper_img,(480,120))
+
 tile_img = pygame.image.load("img/Tile.png")
 tile_img = pygame.transform.scale(tile_img,(60, 60))
 
@@ -47,18 +50,21 @@ class Graphics:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.main_surf = pygame.Surface((WIDTH, HEIGHT))
         pygame.display.set_caption('Rolling Lava')
+        self.start = False
 
         self.main_scale = 1.0
         self.scale_direction = 1
 
-        
-
     def draw(self, env):
         self.main_surf.blit(background_img, (0,0))
         self.draw_tiles(env.state, env.scroll_offset)
-        env.player.draw(self.main_surf)
-        
+        env.player.draw(self.main_surf) 
+
+        if self.start == True:
+            self.main_surf.blit(upper_img, (0, 0))
+
         self.screen.blit(self.main_surf, (0, 0))
+
 
     def main_img_call(self, start):
        
@@ -71,6 +77,8 @@ class Graphics:
             x = (WIDTH - img_w) // 2
             y = 150
             self.screen.blit(scaled_img, (x, y))
+        else:
+            self.start = True
 
 
     def animate_main_img(self):

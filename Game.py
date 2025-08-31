@@ -14,6 +14,7 @@ text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
 death_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 45)
 restart_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
 
+
 pygame.mixer.music.load('sfx/background.mp3')
 pygame.mixer.music.play(-1) 
 
@@ -44,6 +45,7 @@ def main():
         if start:
             graphics.main_img_call(True)
             
+            
             if not env.game_over:
                 action = player.action(events)
                 env.move(action)
@@ -66,7 +68,7 @@ def main():
                             env.play_start_sound()
                 
             
-            graphics.draw_text(str(env.score), text_font, ('white'), 10, 10)
+            graphics.draw_text(str(env.score), text_font, ('black'), 13, 18)
                 
         pygame.display.update()
         clock.tick(FPS)

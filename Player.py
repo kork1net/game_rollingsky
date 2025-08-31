@@ -11,30 +11,34 @@ class Player (pygame.sprite.Sprite):
         for i in range(len(self.images)):
             self.images[i] = pygame.transform.scale(self.images[i],(45, 45))
             if i==4:
-                self.images[i] = pygame.transform.scale(broken_img,(55, 55))
+                self.images[i] = pygame.transform.scale(broken_img,(45, 45))
 
         self.balls_index = 0
 
         self.rect = self.images[0].get_rect()
         self.col = 4
         self.row = 10
-        self.x = 140
         self.tile = 60
+        self.x = self.tile * self.col + self.tile / 2
         self.animation = 0
         self.animation_speed = 8
         self.jumping = False
         self.broken = False
+
+        
             
     def move (self, action):
+
         if (action == -1 and self.col != 0):
             self.col += action
         if (action == 1 and self.col != 7):
             self.col += action
-        
-        
+
+    
     def draw (self, surface):
+
         y = self.tile * self.row + self.tile / 2
-        self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.7
+        self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.4
         self.rect.center = (self.x, y)
         
         if self.jumping == True:
@@ -54,4 +58,3 @@ class Player (pygame.sprite.Sprite):
                 self.animation = 0
         else:
             self.balls_index = 4
-            self.x -= 10   

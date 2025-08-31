@@ -14,6 +14,7 @@ start_sound = pygame.mixer.Sound("sfx/starts.mp3")
 class Enviroment:
     def __init__(self, state, speed = 10):
 
+        
         self.state : State = state
         self.player = Player()
         
@@ -268,6 +269,7 @@ class Enviroment:
 
         # Scroll all rows one down
         self.state.board[1:] = self.state.board[:-1]
+    
         # New row        
         self.state.board[0] = 0
 
