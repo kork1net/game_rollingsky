@@ -52,7 +52,7 @@ class Enviroment:
         self.spike_frequency = 25 # lower -> more spikes
 
         self.score = 0
-        self.score_speed = 10
+        self.score_speed = 6 #############
         self.game_over = False
     
     def play_start_sound(self):
@@ -89,13 +89,13 @@ class Enviroment:
 
         self.speed = 6
         self.jumpduration = 35
-        self.score_speed = 10
+        self.score_speed = 6 ############
         self.player.animation_speed = 8
 
         if (self.boost and self.boost_counter < 200):
             self.jumpduration = 20
             self.speed = 10
-            self.score_speed = 5
+            self.score_speed = 3
             self.player.animation_speed = 3
 
         elif (self.slow and self.slow_counter < 200):
@@ -242,19 +242,19 @@ class Enviroment:
             self.state.board[0, col] = 4
 
     def add_bonus200(self):
-        delay = random.randint(5, 1000)
+        delay = random.randint(5, 700)
         if self.step % delay == 0:
             col = random.randint(self.wait, self.wait + 3)
             self.state.board[0, col] = 6
 
     def add_bonus1000(self):
-        delay = random.randint(5, 21000)
+        delay = random.randint(5, 15000)
         if self.step % delay == 0:
             col = random.randint(self.wait, self.wait + 3)
             self.state.board[0, col] = 7
 
     def add_bonus3000(self):
-        delay = random.randint(5, 38500)
+        delay = random.randint(5, 36500)
         if self.step % delay == 0:
             col = random.randint(self.wait, self.wait + 3)
             self.state.board[0, col] = 8
@@ -274,7 +274,6 @@ class Enviroment:
         self.state.board[0] = 0
 
         hole = random.randint(1,8)
-
         self.state.board[0, self.wait:self.wait + 4] = 1
         
         self.height_left -= 1
@@ -283,8 +282,7 @@ class Enviroment:
             if(hole == 1):
                 jumper_tile = random.randint(self.wait, self.wait + 3) 
                 self.state.board[0, self.wait:self.wait + 4] = 0 # empty row
-                self.state.board[1, jumper_tile] = 5 # place a jumper
-                
+                self.state.board[1, jumper_tile] = 5 # place a jumper                
             else:
                 self.state.board[0, self.wait:self.wait + 4] = 1
                 self.add_all()

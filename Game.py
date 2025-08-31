@@ -66,10 +66,10 @@ def main():
                             env.reset()
                             pygame.mixer.music.play(-1)
                             env.play_start_sound()
-                
-            
-            graphics.draw_text(str(env.score), text_font, ('black'), 13, 18)
-                
+
+
+            graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
+
         pygame.display.update()
         clock.tick(FPS)
 
