@@ -16,7 +16,7 @@ restart_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
 
 
 pygame.mixer.music.load('sfx/background.mp3')
-#pygame.mixer.music.play(-1) 
+pygame.mixer.music.play(-1) 
 
 def main():
     
@@ -25,11 +25,21 @@ def main():
     while (run):
         pygame.event.pump()
         events = pygame.event.get()
+        graphics(env)
         for event in events:
+
             if event.type == pygame.QUIT:
                 run = False
 
-        graphics(env)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = event.pos
+                if graphics.sound_rect.collidepoint(mouse_pos): ## sound button pressed
+                    graphics.sound_button_pressed()
+                    if graphics.sound_state == 0:
+                        pygame.mixer.music.unpause() 
+                    else:
+                        pygame.mixer.music.pause()
+                
 
         if not start:
             graphics.main_img_call(False)
@@ -44,7 +54,6 @@ def main():
 
         if start:
             graphics.main_img_call(True)
-            
             
             if not env.game_over:
                 action = player.action(events)
@@ -64,7 +73,9 @@ def main():
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
                             env.reset()
-                            #pygame.mixer.music.play(-1)
+                            if (graphics.sound_state == 0):
+                                pygame.mixer.music.unpause()
+                                pygame.mixer.music.play(-1)
                             env.play_start_sound()
 
 

@@ -27,9 +27,6 @@ bonus1000_img = pygame.transform.scale(bonus1000_img,(60, 60))
 bonus3000_img = pygame.image.load("img/Bonus3000.png")
 bonus3000_img = pygame.transform.scale(bonus3000_img,(60, 60))
 
-star_img = pygame.image.load("img/Star.png")
-star_img = pygame.transform.scale(star_img,(60, 60))
-
 slime_img = pygame.image.load("img/Slime.png")
 slime_img = pygame.transform.scale(slime_img,(60, 60))
 
@@ -55,6 +52,21 @@ class Graphics:
         self.main_scale = 1.0
         self.scale_direction = 1
 
+        self.sound_state = 0
+
+        self.sound = [pygame.image.load("img/SoundOn.png"), pygame.image.load("img/SoundOff.png")]
+        for i in range(len(self.sound)):
+            self.sound[i] = pygame.transform.scale(self.sound[i],(40, 40))
+        self.sound_rect = self.sound[self.sound_state].get_rect()
+        self.sound_rect.topleft = (430, 670)
+
+    def sound_button_pressed(self):
+        if self.sound_state == 1:
+            self.sound_state = 0
+        else:
+            self.sound_state = 1
+        
+    
     def draw(self, env):
         self.main_surf.blit(background_img, (0,0))
         self.draw_tiles(env.state, env.scroll_offset)
@@ -62,6 +74,9 @@ class Graphics:
 
         if self.start == True:
             self.main_surf.blit(upper_img, (0, 0))
+        
+        self.main_surf.blit(self.sound[self.sound_state], (430,670))
+        
 
         self.screen.blit(self.main_surf, (0, 0))
 
@@ -120,7 +135,6 @@ class Graphics:
             self.main_surf.blit(bonus3000_img, (x,y))
         if current == 9: # easter egg
             self.main_surf.blit(tile_img, (x, y))
-            self.main_surf.blit(star_img, (x,y))
 
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
