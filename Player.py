@@ -25,8 +25,8 @@ class Player (pygame.sprite.Sprite):
         self.jumping = False
         self.broken = False
 
-        
-            
+        self.jumping_offset = 1
+    
     def move (self, action):
 
         if (action == -1 and self.col != 0):
@@ -34,20 +34,26 @@ class Player (pygame.sprite.Sprite):
         if (action == 1 and self.col != 7):
             self.col += action
 
-    
     def draw (self, surface):
 
         y = self.tile * self.row + self.tile / 2
         self.x += ((self.tile * self.col + self.tile / 2) - self.x) * 0.4
         self.rect.center = (self.x, y)
+
+        image = self.images[self.balls_index]
         
         if self.jumping == True:
-            image = pygame.transform.scale(self.images[self.balls_index], (70, 70))
-            self.x -= 15
+            if self.jumping_offset < 1.5:
+                self.jumping_offset += 0.08
         else:
-            image = self.images[self.balls_index]
+            if self.jumping_offset > 1:
+                self.jumping_offset -= 0.05
 
-        surface.blit(image, self.rect)
+        
+        image = pygame.transform.scale_by(self.images[self.balls_index], self.jumping_offset)
+        rect = image.get_rect(center=self.rect.center)
+        
+        surface.blit(image, rect)
 
         if (not self.broken):
             self.animation += 1

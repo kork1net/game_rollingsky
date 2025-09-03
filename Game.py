@@ -16,7 +16,7 @@ restart_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
 
 
 pygame.mixer.music.load('sfx/background.mp3')
-pygame.mixer.music.play(-1) 
+#pygame.mixer.music.play(-1) 
 
 def main():
     
@@ -64,7 +64,7 @@ def main():
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
                             env.reset()
-                            pygame.mixer.music.play(-1)
+                            #pygame.mixer.music.play(-1)
                             env.play_start_sound()
 
 

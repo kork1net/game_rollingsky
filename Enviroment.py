@@ -115,51 +115,56 @@ class Enviroment:
 
 
     def hit(self):
-
         board = self.state.board
-                
+
+        player_rect = self.player.rect
+
+        tile_size = self.tile_size
+
+        row = int((player_rect.centery - self.scroll_offset) // tile_size)
         col = self.player.col
-        row = self.player.row
+
+        tile_id = board[row, col]
 
         self.play_sound(col, row, board)
 
-        if board[row, col] == 0:
-            if (not self.jumping):
-                self.game_over = True # stop game
+        if tile_id == 0:
+            if not self.jumping:
+                self.game_over = True
                 self.player.broken = True
 
-        elif board[row, col] == 2:
-            if (not self.jumping):
-                self.game_over = True # stop game
+        elif tile_id == 2:  # ספייק
+            if not self.jumping:
+                self.game_over = True
                 self.player.broken = True
 
-        elif board[row, col] == 3:
-            if (not self.jumping):
+        elif tile_id == 3:  # בוסט
+            if not self.jumping:
                 self.boost = True
                 self.boost_counter = 0
                 self.slow = False
 
-        elif board[row, col] == 4:
-            if (not self.jumping):
+        elif tile_id == 4:  # סליים
+            if not self.jumping:
                 self.slow = True
                 self.slow_counter = 0
                 self.boost = False
 
-        elif board[row, col] == 5:
+        elif tile_id == 5:  # ג'אמפר
             self.jumping = True
             self.jumping_counter = 0
 
-        elif board[row, col] == 6:
+        elif tile_id == 6:
             if not self.jumping and not self.touched_boost:
                 self.score += 200
             self.touched_boost = True
 
-        elif board[row, col] == 7:
+        elif tile_id == 7:
             if not self.jumping and not self.touched_boost2:
                 self.score += 1000
             self.touched_boost2 = True
         
-        elif board[row, col] == 8:
+        elif tile_id == 8:
             if not self.jumping and not self.touched_boost3:
                 self.score += 3000
             self.touched_boost3 = True
