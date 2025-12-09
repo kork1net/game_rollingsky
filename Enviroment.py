@@ -5,6 +5,7 @@ from State import State
 
 pygame.mixer.init()
 boost_sound = pygame.mixer.Sound("sfx/start.mp3")
+boost_sound.set_volume(0.2)
 death = pygame.mixer.Sound("sfx/die.mp3")
 bonus_sound = pygame.mixer.Sound("sfx/bonus.mp3")
 slime_sound = pygame.mixer.Sound("sfx/slimes.mp3")
@@ -50,6 +51,7 @@ class Enviroment:
 
         self.jumpduration = 35
         self.spike_frequency = 25 # lower -> more spikes
+        self.jumper_frequency = 8
 
         self.score = 0
         self.score_speed = 6 #############
@@ -73,6 +75,7 @@ class Enviroment:
             self.spike_frequency = 5
         if (3000 < self.score):
             self.spike_frequency = 1
+            self.jumper_frequency = 2
     
 
         self.boost_counter += 1
@@ -259,7 +262,7 @@ class Enviroment:
             self.state.board[0, col] = 7
 
     def add_bonus3000(self):
-        delay = random.randint(5, 36500)
+        delay = random.randint(5, 36000)
         if self.step % delay == 0:
             col = random.randint(self.wait, self.wait + 3)
             self.state.board[0, col] = 8
@@ -272,13 +275,13 @@ class Enviroment:
 
     def roll(self):
 
-        # Scroll all rows one down
+        # scroll all rows one down
         self.state.board[1:] = self.state.board[:-1]
     
-        # New row        
+        # new row        
         self.state.board[0] = 0
 
-        hole = random.randint(1,8)
+        hole = random.randint(1,self.jumper_frequency)
         self.state.board[0, self.wait:self.wait + 4] = 1
         
         self.height_left -= 1
