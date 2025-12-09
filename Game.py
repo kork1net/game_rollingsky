@@ -3,6 +3,7 @@ from Graphics import *
 from Enviroment import Enviroment
 from State import State
 from Human_agent import Human_agent
+from Random_agent import Random_agent
 
 pygame.init()
 clock = pygame.time.Clock()

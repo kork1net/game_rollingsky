@@ -54,7 +54,7 @@ class Enviroment:
         self.jumper_frequency = 8
 
         self.score = 0
-        self.score_speed = 6 #############
+        self.score_speed = 5 #############
         self.game_over = False
     
     def play_start_sound(self):
@@ -92,7 +92,7 @@ class Enviroment:
 
         self.speed = 6
         self.jumpduration = 35
-        self.score_speed = 6 ############
+        self.score_speed = 5 ############
         self.player.animation_speed = 8
 
         if (self.boost and self.boost_counter < 200):

@@ -26,13 +26,20 @@ class Player (pygame.sprite.Sprite):
         self.broken = False
 
         self.jumping_offset = 1
+
+        self.last_action = 0
     
     def move (self, action):
+        if action == self.last_action:
+            return
+
+        self.last_action = action
 
         if (action == -1 and self.col != 0):
             self.col += action
         if (action == 1 and self.col != 7):
             self.col += action
+        
 
     def draw (self, surface):
 
