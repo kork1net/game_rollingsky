@@ -47,6 +47,7 @@ def main():
             graphics.main_img_call(False)
             graphics.draw_text("Press [space]", restart_font, ('black'), 75, 483)
             graphics.draw_text("Press [space]", restart_font, ('white'), 75, 480)
+            
             for event in events:
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
@@ -58,7 +59,7 @@ def main():
             graphics.main_img_call(True)
             
             for event in events:
-                    if event.type == pygame.KEYDOWN:
+                    if event.type == pygame.KEYDOWN and not env.game_over:
                         if event.key == pygame.K_ESCAPE and env.pause == False:
                             env.pause = True
                             pygame.mixer.music.pause()
@@ -94,9 +95,8 @@ def main():
 
             graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
 
-        if not env.pause:
-            pygame.display.update()
-            clock.tick(FPS)
+        pygame.display.update()
+        clock.tick(FPS)
 
 if __name__ == '__main__':
     main()

@@ -139,7 +139,6 @@ class Graphics:
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
         self.screen.blit(img, (x,y))
-        pygame.display.update()
 
     def calc_pos(self, row_col, scroll_offset=0):
         row, col = row_col
