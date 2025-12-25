@@ -26,7 +26,8 @@ def main():
     while (run):
         pygame.event.pump()
         events = pygame.event.get()
-        graphics(env)
+        if not env.pause:
+            graphics(env)
         for event in events:
 
             if event.type == pygame.QUIT:
@@ -56,10 +57,21 @@ def main():
         if start:
             graphics.main_img_call(True)
             
-            if not env.game_over:
+            for event in events:
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_ESCAPE and env.pause == False:
+                            env.pause = True
+                            pygame.mixer.music.pause()
+                            graphics.draw_text("paused", restart_font, ('white'), 170, 350)
+
+                        elif event.key == pygame.K_ESCAPE and env.pause == True:
+                            env.pause = False
+                            pygame.mixer.music.unpause()
+
+            if not env.game_over and not env.pause:
                 action = player.action(events)
                 env.move(action)
-
+            
             if env.game_over:
 
                 graphics.draw_text("Game Over!", death_font, ('red'), 20, 305)
@@ -82,8 +94,9 @@ def main():
 
             graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
 
-        pygame.display.update()
-        clock.tick(FPS)
+        if not env.pause:
+            pygame.display.update()
+            clock.tick(FPS)
 
 if __name__ == '__main__':
     main()

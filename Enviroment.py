@@ -56,6 +56,7 @@ class Enviroment:
         self.score = 0
         self.score_speed = 5 #############
         self.game_over = False
+        self.pause = False
     
     def play_start_sound(self):
         start_sound.play()
