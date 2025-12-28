@@ -67,13 +67,15 @@ class Enviroment:
         self.step += 1
 
         if (self.score < 500):
-            self.spike_frequency = 20
-        if (100 < self.score < 1000):
             self.spike_frequency = 15
+        if (100 < self.score < 1000):
+            self.spike_frequency = 11
         if (1000 < self.score < 2000):
-            self.spike_frequency = 10
+            self.spike_frequency = 7
+            self.jumper_frequency = 4
         if (2000 < self.score < 3000):
-            self.spike_frequency = 5
+            self.spike_frequency = 3
+            self.jumper_frequency = 3
         if (3000 < self.score):
             self.spike_frequency = 1
             self.jumper_frequency = 2
