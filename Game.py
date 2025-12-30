@@ -29,7 +29,7 @@ def main():
         player = Human_agent()
 
     while (run):
-        # pygame.event.pump()
+        pygame.event.pump()
         events = pygame.event.get()
         if not env.pause:
             graphics(env)
