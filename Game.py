@@ -4,12 +4,13 @@ from Enviroment import Enviroment
 from State import State
 from Human_agent import Human_agent
 from Random_agent import Random_agent
+from DQN_agent import DQN_agent
 
 pygame.init()
 clock = pygame.time.Clock()
 graphics = Graphics()
 env = Enviroment(State())
-player = Human_agent()
+player = DQN_agent(train=False)
 
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
 death_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 45)
@@ -70,7 +71,8 @@ def main():
                             pygame.mixer.music.unpause()
 
             if not env.game_over and not env.pause:
-                action = player.action(events)
+                # action = player.action(events)
+                action = player.action(env.state)
                 env.move(action)
             
             if env.game_over:
