@@ -10,7 +10,7 @@ pygame.init()
 clock = pygame.time.Clock()
 graphics = Graphics()
 env = Enviroment(State())
-p = 1
+p = 1 # 1 -> DQN_agent
 
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
 death_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 45)

@@ -29,7 +29,7 @@ class DQN_agent:
         rnd = random.random()
         actions = [1, 0, -1]
 
-        if rnd < 1:# epsilon:
+        if rnd < epsilon:# epsilon:
             self.step += 1
             return random.choice(actions)
 
@@ -57,6 +57,7 @@ class DQN_agent:
         if decay <= 0:
             return final
         eps = final + (start - final) * math.exp(-1.0 * float(epoch) / float(decay))
+        print(float(max(final, min(start, eps))))
         return float(max(final, min(start, eps)))
 
             
