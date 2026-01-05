@@ -10,7 +10,7 @@ gamma = 0.99
 MSELoss = nn.MSELoss()
 
 class DQN(nn.Module):
-    def __init__(self, num_actions=2):
+    def __init__(self, num_actions=3):
         super().__init__()
 
         self.conv = nn.Sequential(
@@ -35,6 +35,11 @@ class DQN(nn.Module):
     def loss(self, Q_value, rewards, Q_next_Values, Dones):
         Q_new = rewards + gamma * Q_next_Values * (1- Dones)
         return MSELoss(Q_value, Q_new)
+    
+    def copy (self):
+        new_DQN = DQN()
+        new_DQN.load_state_dict(self.state_dict())
+        return new_DQN
 
     def __call__(self, states, actions=None):
         return self.forward(states)

@@ -6,6 +6,8 @@ from Enviroment import Enviroment
 from State import State
 from DQN import DQN
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 class DQN_agent:
     def __init__(self, env=None, train = True) -> None:
         self.DQN = DQN()
@@ -22,8 +24,6 @@ class DQN_agent:
             self.DQN.eval()
         
     def action(self, state: State, epoch = None, events= None, train = None):
-        #actions = [1, -1]
-        #return random.choice(actions)
         epoch = self.step
         epsilon = self.epsilon_greedy(epoch)
         rnd = random.random()
@@ -33,15 +33,19 @@ class DQN_agent:
             self.step += 1
             return random.choice(actions)
 
-        state_tensor = state.toTensor()
+        state_tensor = state.toTensor(device=device)    
+        state_tensor = state_tensor.view(1, 1, 18, 12).to(device)
 
         with torch.no_grad():
             Q_values = self.DQN(state_tensor)
-        max_index = torch.argmax(Q_values)
+        max_index = torch.argmax(Q_values).item()
+
+        inverse_action_mapping = {0: -1, 1: 0, 2: 1}
+        chosen_action = inverse_action_mapping[max_index]
 
         self.step += 1
 
-        return actions[max_index]
+        return chosen_action
     
     def get_actions(self, states, dones):
         actions = []
@@ -57,7 +61,6 @@ class DQN_agent:
         if decay <= 0:
             return final
         eps = final + (start - final) * math.exp(-1.0 * float(epoch) / float(decay))
-        print(float(max(final, min(start, eps))))
         return float(max(final, min(start, eps)))
 
             

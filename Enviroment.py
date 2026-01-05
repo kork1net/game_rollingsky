@@ -62,6 +62,7 @@ class Enviroment:
         start_sound.play()
 
     def move (self, action):
+        self.player.last_action = None
         self.player.move(action)
         self.hit()
         self.step += 1
@@ -118,6 +119,11 @@ class Enviroment:
 
         if (self.step % self.score_speed == 0):
             self.score += 1 
+
+        reward = self.get_reward()
+        done = self.game_over
+        next_state = self.state
+        return next_state, reward, done
 
 
     def hit(self):
@@ -271,9 +277,10 @@ class Enviroment:
             self.state.board[0, col] = 8
 
     def reset(self):
-        self.__init__(self.state) 
+        self.__init__(self.state)
         self.state.board = self.state.init_board()
         self.player.broken = False
+        return self.state
     
 
     def roll(self):
@@ -323,3 +330,16 @@ class Enviroment:
         self.add_bonus1000()
         self.add_bonus3000()
                 
+
+    def get_reward(self):
+        if self.game_over:
+            return -10
+        else:
+            reward = 0.1
+            if self.state.board[self.player.row, self.player.col] == 6:
+                reward += 2  # bonus 200
+            elif self.state.board[self.player.row, self.player.col] == 7:
+                reward += 10  # bonus 1000
+            elif self.state.board[self.player.row, self.player.col] == 8:
+                reward += 30  # bonus 3000
+            return reward

@@ -10,7 +10,7 @@ pygame.init()
 clock = pygame.time.Clock()
 graphics = Graphics()
 env = Enviroment(State())
-p = 1 # 1 -> DQN_agent
+player = Human_agent()
 
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
 death_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 45)
@@ -23,10 +23,6 @@ def main():
     
     start = False
     run = True
-    if (p == 1):
-        player = DQN_agent(train=False)
-    else:
-        player = Human_agent()
 
     while (run):
         pygame.event.pump()
@@ -75,13 +71,7 @@ def main():
                             pygame.mixer.music.unpause()
 
             if not env.game_over and not env.pause:
-                if p == 1:
-                    if env.step % 10 == 0:
-                        action = player.action(state=env.state)
-                    else:
-                        action = 0
-                else:
-                    action = player.action(events=events, env=env)
+                action = player.action(events=events, env=env)
                 env.move(action)
             
             if env.game_over:
