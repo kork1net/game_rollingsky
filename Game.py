@@ -95,6 +95,7 @@ def main():
 
 
             graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
+            graphics.draw_text("Player", restart_font, ('black'), 10, 685)
 
         pygame.display.update()
         clock.tick(FPS)

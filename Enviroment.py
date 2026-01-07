@@ -7,6 +7,7 @@ pygame.mixer.init()
 boost_sound = pygame.mixer.Sound("sfx/start.mp3")
 boost_sound.set_volume(0.2)
 death = pygame.mixer.Sound("sfx/die.mp3")
+death.set_volume(0.2)
 bonus_sound = pygame.mixer.Sound("sfx/bonus.mp3")
 slime_sound = pygame.mixer.Sound("sfx/slimes.mp3")
 jump_sound = pygame.mixer.Sound("sfx/jumps.mp3")
@@ -336,7 +337,13 @@ class Enviroment:
             return -10
         else:
             reward = 0.1
-            if self.state.board[self.player.row, self.player.col] == 6:
+            if self.state.board[self.player.row, self.player.col] == 5:
+                reward += 5  # jumper
+            elif self.state.board[self.player.row, self.player.col] == 4:
+                reward += -0.1  # slime
+            elif self.state.board[self.player.row, self.player.col] == 3:
+                reward += 2  # boost
+            elif self.state.board[self.player.row, self.player.col] == 6:
                 reward += 2  # bonus 200
             elif self.state.board[self.player.row, self.player.col] == 7:
                 reward += 10  # bonus 1000

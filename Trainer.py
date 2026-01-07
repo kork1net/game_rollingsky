@@ -8,13 +8,10 @@ from DQN import DQN
 from ReplayBuffer import ReplayBuffer
 import torch
 
-
 pygame.init()
 clock = pygame.time.Clock()
 graphics = Graphics()
 env = Enviroment(State())
-p = 1 # 1 -> DQN_agent
-
 
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
 death_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 45)
@@ -22,7 +19,7 @@ restart_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
 
 
 def main():
-   
+    
     #region initialization
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -51,6 +48,8 @@ def main():
 
 
     #endregion  
+
+    #region train loop
     for epoch in range(start_epoch, epochs):
 
         state = env.reset()
@@ -63,15 +62,12 @@ def main():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     return
-            # 1️⃣ בחירת פעולה
             action = player.action(state=state, epoch=epoch)
 
-            # 2️⃣ צעד בסביבה
             next_state, reward, done = env.move(action)
 
             next_state_tensor = next_state.toTensor(device)
 
-            # 3️⃣ שמירה ב־ReplayBuffer
             replay.push_tensors(
                 state_tensor,
                 torch.tensor([[action]], device=device, dtype=torch.long),
@@ -82,7 +78,6 @@ def main():
 
             state = next_state
 
-            # 4️⃣ אימון
             if len(replay) >= batch:
 
                 states, actions, rewards, next_states, dones = replay.sample(batch)
@@ -111,47 +106,21 @@ def main():
                 loss.backward()
                 optim.step()
 
-            # 5️⃣ עדכון רשת מטרה
             if env.step % C == 0:
                 Q_hat.load_state_dict(Q.state_dict())
-
-        print(f"Epoch {epoch} | Score: {env.score}")
-
-run = True
-player = DQN_agent(train=False)
-
-while (run):
-    pygame.event.pump()
-    events = pygame.event.get()
+            
+            graphics(env)
+            graphics.main_img_call(True)
+            graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
+            graphics.draw_text("AI", restart_font, ('black'), 10, 685)
 
 
-    graphics(env)
-    for event in events:
-
-
-        if event.type == pygame.QUIT:
-            run = False
-
-    graphics.main_img_call(True)
-
-
-    if not env.game_over:
-        if env.step % 5 == 0:
-            action = player.action(state=env.state)
-        else:
-           action = 0
-        env.move(action)
-           
-    if env.game_over:
-        env.reset()
-
-    graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
-
+            pygame.display.update()
+            clock.tick(FPS)
         
 
-
-    pygame.display.update()
-    clock.tick(FPS)
+        print(f"Epoch {epoch} | Score: {env.score}")
+    #endregion  
 
 
 if __name__ == '__main__':
