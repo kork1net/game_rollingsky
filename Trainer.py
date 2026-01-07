@@ -23,11 +23,11 @@ def main():
     #region initialization
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    epochs = 100_000
+    epochs = 10000
     start_epoch = 0
     C = 500
     batch = 100
-    learning_rate = 1e-3 
+    learning_rate = 1e-3
     gamma = 0.99
 
     env = Enviroment(State())
