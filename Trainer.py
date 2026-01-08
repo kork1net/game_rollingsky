@@ -14,8 +14,7 @@ graphics = Graphics()
 env = Enviroment(State())
 
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
-death_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 45)
-restart_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
+small_text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
 
 
 def main():
@@ -112,7 +111,7 @@ def main():
             graphics(env)
             graphics.main_img_call(True)
             graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
-            graphics.draw_text("AI", restart_font, ('black'), 10, 685)
+            graphics.draw_text("AI", small_text_font, ('black'), 10, 685)
 
 
             pygame.display.update()
