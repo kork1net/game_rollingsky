@@ -14,9 +14,9 @@ jump_sound = pygame.mixer.Sound("sfx/jumps.mp3")
 start_sound = pygame.mixer.Sound("sfx/starts.mp3")
 
 class Enviroment:
-    def __init__(self, state, speed = 10):
+    def __init__(self, state, speed = 10, render=False):
 
-        
+        self.render = render
         self.state : State = state
         self.player = Player()
         
@@ -188,6 +188,8 @@ class Enviroment:
             self.touched_boost3 = False
 
     def play_sound(self, col, row, board):
+        if not self.render:
+            return
         if board[row, col] == 0 or board[row, col] == 2:
             if (not self.jumping):
                 if not self.played_spike_sound:
@@ -260,22 +262,25 @@ class Enviroment:
             self.state.board[0, col] = 4
 
     def add_bonus200(self):
-        delay = random.randint(5, 700)
-        if self.step % delay == 0:
-            col = random.randint(self.wait, self.wait + 3)
-            self.state.board[0, col] = 6
+        pass
+        # delay = random.randint(5, 700)
+        # if self.step % delay == 0:
+        #     col = random.randint(self.wait, self.wait + 3)
+        #     self.state.board[0, col] = 6
 
     def add_bonus1000(self):
-        delay = random.randint(5, 15000)
-        if self.step % delay == 0:
-            col = random.randint(self.wait, self.wait + 3)
-            self.state.board[0, col] = 7
+        pass
+        # delay = random.randint(5, 15000)
+        # if self.step % delay == 0:
+        #     col = random.randint(self.wait, self.wait + 3)
+        #     self.state.board[0, col] = 7
 
     def add_bonus3000(self):
-        delay = random.randint(5, 36000)
-        if self.step % delay == 0:
-            col = random.randint(self.wait, self.wait + 3)
-            self.state.board[0, col] = 8
+        pass
+        # delay = random.randint(5, 36000)
+        # if self.step % delay == 0:
+        #     col = random.randint(self.wait, self.wait + 3)
+        #     self.state.board[0, col] = 8
 
     def reset(self):
         self.__init__(self.state)

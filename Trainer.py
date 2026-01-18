@@ -22,7 +22,7 @@ def main():
     #region initialization
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    epochs = 10000
+    epochs = 500000
     start_epoch = 0
     C = 500
     batch = 100
@@ -44,6 +44,8 @@ def main():
 
     replay = ReplayBuffer()
     optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
+
+    best_score = 0
 
 
     #endregion  
@@ -108,17 +110,18 @@ def main():
             if env.step % C == 0:
                 Q_hat.load_state_dict(Q.state_dict())
             
-            graphics(env)
-            graphics.main_img_call(True)
-            graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
-            graphics.draw_text("AI", small_text_font, ('black'), 10, 685)
+            #graphics(env)
+            #graphics.main_img_call(True)
+            #graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
+            #graphics.draw_text("AI", small_text_font, ('black'), 10, 685)
 
 
-            pygame.display.update()
-            clock.tick(FPS)
+            #pygame.display.update()
+            #clock.tick(FPS)
         
-
-        print(f"Epoch {epoch} | Score: {env.score}")
+        if (env.score > best_score):
+            best_score = env.score
+        print(f"Epoch {epoch} | Score: {env.score} | Best: {best_score}")
     #endregion  
 
 
