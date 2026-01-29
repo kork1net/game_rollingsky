@@ -1,4 +1,5 @@
 import pygame
+import torch
 from Graphics import *
 from Enviroment import Enviroment
 from State import State
@@ -12,7 +13,13 @@ clock = pygame.time.Clock()
 graphics = Graphics()
 env = Enviroment(State())
 # player = Human_agent()
-player = DQN_agent(env=env, train=False)
+player = DQN_agent(parametes_path=None, env=env, train=False)
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+try:
+    player.DQN.to(device)
+except Exception:
+    pass
 
 
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)

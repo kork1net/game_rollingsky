@@ -7,6 +7,7 @@ from DQN_agent import DQN_agent
 from DQN import DQN
 from ReplayBuffer import ReplayBuffer
 import torch
+import os
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -35,6 +36,17 @@ def main():
     player.DQN.to(device)
     player_hat = DQN_agent(env=env, train=False)
     player_hat.DQN.to(device)
+
+    checkpoint_path = "data/checkpoint.pth"
+    
+    if os.path.exists(checkpoint_path):
+        checkpoint = torch.load(checkpoint_path)
+        start_epoch = checkpoint['epoch']+1
+        player.DQN.load_state_dict(checkpoint['model_state_dict'])
+        player_hat.DQN.load_state_dict(checkpoint['model_state_dict'])
+        optim.load_state_dict(checkpoint['optimizer_state_dict'])
+        ######################################
+
 
     Q = player.DQN.to(device)
     Q_hat: DQN = Q.copy().to(device)
@@ -122,7 +134,7 @@ def main():
         
         if (env.score > best_score):
             best_score = env.score
-        
+            #player.save_param(checkpoint_path)
     #endregion  
 
 

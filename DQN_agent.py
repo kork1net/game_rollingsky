@@ -11,9 +11,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 class DQN_agent:
-    def __init__(self, env=None, train = True) -> None:
+    def __init__(self, parametes_path=None, env=None, train = True) -> None:
         self.DQN = DQN()
-        self.is_train = True
+        if parametes_path:
+            self.DQN.load_params(parametes_path)
         self.step = 0
         self.train(train)
         self.env = env
@@ -50,7 +51,7 @@ class DQN_agent:
         chosen_action = inverse_action_mapping[max_index]
 
         q_vals = Q_values.cpu().numpy()[0]
-        if (self.step % 100 == 0):
+        if (self.step % 1000000 == 0):
             print(f"Q-values: left={q_vals[0]:.4f}, center={q_vals[1]:.4f}, right={q_vals[2]:.4f} | max_index: {max_index} | Epoch: {epoch} | Executed {self.executed} actions")
 
         self.step += 1
@@ -73,3 +74,9 @@ class DQN_agent:
             return final
         eps = ((start - final) / -decay) * epoch + 1
         return eps
+
+    def save_param(self, path):
+        self.DQN.save_params(path)
+
+    def load_params(self, path):
+        self.DQN.load_params(path)
