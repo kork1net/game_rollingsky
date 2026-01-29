@@ -29,7 +29,7 @@ def main():
     learning_rate = 1e-3
     gamma = 0.99
 
-    env = Enviroment(State())
+    env = Enviroment(State(), render=True)
 
     player = DQN_agent(env=env, train=True)
     player.DQN.to(device)
@@ -78,6 +78,7 @@ def main():
             )
 
             state = next_state
+            state_tensor = next_state_tensor.float()
 
             if len(replay) >= batch:
 
@@ -94,6 +95,7 @@ def main():
                 actions_idx = actions_idx.view(-1, 1) 
 
                 q_sa = q_values.gather(1, actions_idx).squeeze(1)
+                
 
                 
 
@@ -110,18 +112,17 @@ def main():
             if env.step % C == 0:
                 Q_hat.load_state_dict(Q.state_dict())
             
-            #graphics(env)
-            #graphics.main_img_call(True)
-            #graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
-            #graphics.draw_text("AI", small_text_font, ('black'), 10, 685)
-
-
-            #pygame.display.update()
-            #clock.tick(FPS)
+            if env.render:
+                graphics(env)
+                graphics.main_img_call(True)
+                graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
+                graphics.draw_text("AI", small_text_font, ('black'), 10, 685)
+                pygame.display.update()
+                clock.tick(FPS)
         
         if (env.score > best_score):
             best_score = env.score
-        print(f"Epoch {epoch} | Score: {env.score} | Best: {best_score}")
+        
     #endregion  
 
 

@@ -17,6 +17,7 @@ class DQN_agent:
         self.step = 0
         self.train(train)
         self.env = env
+        self.executed = 0
    
     def train(self, train: bool):
         self.is_train = train
@@ -27,13 +28,15 @@ class DQN_agent:
        
     def action(self, state: State, epoch = None, events= None, train = None):
         epoch = self.step
+        
         epsilon = self.epsilon_greedy(epoch)
         rnd = random.random()
         actions = [-1, 0, 1]
         if rnd < epsilon:# epsilon:
             self.step += 1
             return random.choice(actions)
-
+        
+        self.executed += 1
 
         state_tensor = state.toTensor(device=device)    
         state_tensor = state_tensor.view(1, 1, 18, 12).to(device)
@@ -42,14 +45,15 @@ class DQN_agent:
         with torch.no_grad():
             Q_values = self.DQN(state_tensor)
         max_index = torch.argmax(Q_values).item()
-
-
+        
         inverse_action_mapping = [-1, 0, 1]
         chosen_action = inverse_action_mapping[max_index]
 
+        q_vals = Q_values.cpu().numpy()[0]
+        if (self.step % 100 == 0):
+            print(f"Q-values: left={q_vals[0]:.4f}, center={q_vals[1]:.4f}, right={q_vals[2]:.4f} | max_index: {max_index} | Epoch: {epoch} | Executed {self.executed} actions")
 
         self.step += 1
-
 
         return chosen_action
    
@@ -64,7 +68,7 @@ class DQN_agent:
            
 
 
-    def epsilon_greedy(self, epoch, start = 1.0, final=0.01, decay=2000.0):
+    def epsilon_greedy(self, epoch, start = 1.0, final=0.01, decay=1500.0):
         if epoch > decay:
             return final
         eps = ((start - final) / -decay) * epoch + 1

@@ -188,6 +188,9 @@ class Enviroment:
             self.touched_boost3 = False
 
     def play_sound(self, col, row, board):
+
+        return
+
         if not self.render:
             return
         if board[row, col] == 0 or board[row, col] == 2:
@@ -283,7 +286,7 @@ class Enviroment:
         #     self.state.board[0, col] = 8
 
     def reset(self):
-        self.__init__(self.state)
+        self.__init__(self.state, render=self.render)
         self.state.board = self.state.init_board()
         self.player.broken = False
         return self.state
