@@ -6,16 +6,28 @@ from State import State
 from Human_agent import Human_agent
 from Random_agent import Random_agent
 from DQN_agent import DQN_agent
+import os
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 pygame.init()
 clock = pygame.time.Clock()
 graphics = Graphics()
 env = Enviroment(State())
-# player = Human_agent()
-player = DQN_agent(parametes_path=None, env=env, train=False)
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# player = Human_agent()
+player = DQN_agent(env=env, train=False)
+
+checkpoint_path = "data/run_001.pth"
+
+if isinstance(player, DQN_agent):
+    if os.path.exists(checkpoint_path):
+        checkpoint = torch.load(checkpoint_path, map_location=device)
+        player.DQN.load_state_dict(checkpoint['model_state_dict'])
+        print("Loaded trained model")
+    else:
+        print("No trained model found")
+
 try:
     player.DQN.to(device)
 except Exception:
@@ -71,8 +83,6 @@ def main():
                             env.reset()
                             env.play_start_sound()
                             start = True
-
-
         if start:
             graphics.main_img_call(True)
            
@@ -90,7 +100,8 @@ def main():
 
 
             if not env.game_over and not env.pause:
-                action = player.action(events=events, state=env.state)
+                action = player.action(state=env.state, events=events)
+                print(action)
                 env.move(action)
            
             if env.game_over:

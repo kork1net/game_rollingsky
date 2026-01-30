@@ -17,6 +17,16 @@ env = Enviroment(State())
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
 small_text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
 
+def get_new_run_path(folder="data"):
+    os.makedirs(folder, exist_ok=True)
+    runs = [
+        int(f.split("_")[1].split(".")[0])
+        for f in os.listdir(folder)
+        if f.startswith("run_") and f.endswith(".pth")
+    ]
+    run_id = max(runs) + 1 if runs else 1
+    return os.path.join(folder, f"run_{run_id:03d}.pth")
+
 
 def main():
     
@@ -37,7 +47,14 @@ def main():
     player_hat = DQN_agent(env=env, train=False)
     player_hat.DQN.to(device)
 
-    checkpoint_path = "data/checkpoint.pth"
+    Q = player.DQN.to(device)
+    Q_hat: DQN = Q.copy().to(device)
+    Q_hat.eval()
+
+    optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
+
+    checkpoint_path = get_new_run_path("data")
+    print("saving training to:", checkpoint_path)
     
     if os.path.exists(checkpoint_path):
         checkpoint = torch.load(checkpoint_path)
@@ -45,17 +62,11 @@ def main():
         player.DQN.load_state_dict(checkpoint['model_state_dict'])
         player_hat.DQN.load_state_dict(checkpoint['model_state_dict'])
         optim.load_state_dict(checkpoint['optimizer_state_dict'])
-        ######################################
 
-
-    Q = player.DQN.to(device)
-    Q_hat: DQN = Q.copy().to(device)
-    Q_hat.eval()
 
     player_hat.DQN = Q_hat
 
     replay = ReplayBuffer()
-    optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
 
     best_score = 0
 
@@ -108,9 +119,6 @@ def main():
 
                 q_sa = q_values.gather(1, actions_idx).squeeze(1)
                 
-
-                
-
                 with torch.no_grad():
                     q_next = Q_hat(next_states).max(1)[0]
                     target = rewards + gamma * q_next * (1 - dones)
@@ -134,12 +142,11 @@ def main():
         
         if (env.score > best_score):
             best_score = env.score
-            #player.save_param(checkpoint_path)
+        if epoch % 20 == 0:
+            torch.save({'epoch': epoch, 'model_state_dict': Q.state_dict(), 'optimizer_state_dict': optim.state_dict()}, checkpoint_path)
+        #print(f"Model saved at epoch {epoch} with max score {best_score}")
     #endregion  
 
 
 if __name__ == '__main__':
     main()
-
-
-

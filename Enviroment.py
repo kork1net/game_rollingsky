@@ -63,7 +63,7 @@ class Enviroment:
         start_sound.play()
 
     def move (self, action):
-        self.player.last_action = None
+
         self.player.move(action)
         self.hit()
         self.step += 1
@@ -348,13 +348,13 @@ class Enviroment:
             if self.state.board[self.player.row, self.player.col] == 5:
                 reward += 5  # jumper
             elif self.state.board[self.player.row, self.player.col] == 4:
-                reward += -0.1  # slime
+                reward += 0  # slime
             elif self.state.board[self.player.row, self.player.col] == 3:
-                reward += 2  # boost
+                reward += 0  # boost
             elif self.state.board[self.player.row, self.player.col] == 6:
-                reward += 2  # bonus 200
+                reward += 10  # bonus 200
             elif self.state.board[self.player.row, self.player.col] == 7:
-                reward += 10  # bonus 1000
+                reward += 15  # bonus 1000
             elif self.state.board[self.player.row, self.player.col] == 8:
-                reward += 30  # bonus 3000
+                reward += 40  # bonus 3000
             return reward
