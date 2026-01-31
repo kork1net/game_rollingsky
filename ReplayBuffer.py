@@ -19,9 +19,8 @@ class ReplayBuffer:
             *random.sample(self.buffer, batch_size)
         )
 
-        # Concatenate along batch dimension
-        states = torch.cat(states, dim=0)       # [batch,1,18,12]
-        next_states = torch.cat(next_states, dim=0)
+        states = torch.cat(states, dim=0)       # [batch,1,12,12]
+        next_states = torch.cat(next_states, dim=0)  # [batch,1,12,12]
         actions = torch.cat(actions, dim=0)     # [batch,1]
         rewards = torch.cat(rewards, dim=0)     # [batch,1]
         dones = torch.cat(dones, dim=0)         # [batch,1]

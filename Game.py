@@ -18,7 +18,7 @@ env = Enviroment(State())
 # player = Human_agent()
 player = DQN_agent(env=env, train=False)
 
-checkpoint_path = "data/run_001.pth"
+checkpoint_path = "data/run_002.pth"
 
 if isinstance(player, DQN_agent):
     if os.path.exists(checkpoint_path):

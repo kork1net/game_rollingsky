@@ -24,7 +24,10 @@ def get_new_run_path(folder="data"):
         for f in os.listdir(folder)
         if f.startswith("run_") and f.endswith(".pth")
     ]
-    run_id = max(runs) + 1 if runs else 1
+    if runs:
+        run_id = max(runs) + 1
+    else:
+        run_id = 1
     return os.path.join(folder, f"run_{run_id:03d}.pth")
 
 
@@ -35,9 +38,9 @@ def main():
 
     epochs = 500000
     start_epoch = 0
-    C = 500
+    C = 5000
     batch = 100
-    learning_rate = 1e-3
+    learning_rate = 1e-4
     gamma = 0.99
 
     env = Enviroment(State(), render=True)
@@ -62,7 +65,7 @@ def main():
         player.DQN.load_state_dict(checkpoint['model_state_dict'])
         player_hat.DQN.load_state_dict(checkpoint['model_state_dict'])
         optim.load_state_dict(checkpoint['optimizer_state_dict'])
-
+        Q_hat.load_state_dict(checkpoint['model_state_dict'])
 
     player_hat.DQN = Q_hat
 
@@ -77,7 +80,7 @@ def main():
     for epoch in range(start_epoch, epochs):
 
         state = env.reset()
-        state_tensor = state.toTensor(device)
+        state_tensor = state.toTensor(device, env.player)
         state_tensor = state_tensor.float()
         done = False
 
@@ -90,11 +93,14 @@ def main():
 
             next_state, reward, done = env.move(action)
 
-            next_state_tensor = next_state.toTensor(device)
+            next_state_tensor = next_state.toTensor(device, env.player)
+            
+            action_mapping = {-1: 0, 0: 1, 1: 2}
+            action_idx = action_mapping[action]
 
             replay.push_tensors(
                 state_tensor,
-                torch.tensor([[action]], device=device, dtype=torch.long),
+                torch.tensor([[action_idx]], device=device, dtype=torch.long),
                 torch.tensor([[reward]], device=device, dtype=torch.float32),
                 next_state_tensor,
                 torch.tensor([[done]], device=device, dtype=torch.float32)
@@ -107,15 +113,13 @@ def main():
 
                 states, actions, rewards, next_states, dones = replay.sample(batch)
 
-                states = states.to(device).view(batch, 1, 18, 12)
-                next_states = next_states.to(device).view(batch, 1, 18, 12)
+                states = states.to(device)
+                next_states = next_states.to(device)
                 rewards = rewards.to(device).view(-1)
                 dones = dones.to(device).view(-1)
                 q_values = Q(states)
 
-                action_mapping = {-1: 0, 0: 1, 1: 2}
-                actions_idx = torch.tensor([[action_mapping[a.item()]] for a in actions], device=device, dtype=torch.long)
-                actions_idx = actions_idx.view(-1, 1) 
+                actions_idx = actions.view(-1, 1) 
 
                 q_sa = q_values.gather(1, actions_idx).squeeze(1)
                 
@@ -144,7 +148,8 @@ def main():
             best_score = env.score
         if epoch % 20 == 0:
             torch.save({'epoch': epoch, 'model_state_dict': Q.state_dict(), 'optimizer_state_dict': optim.state_dict()}, checkpoint_path)
-        #print(f"Model saved at epoch {epoch} with max score {best_score}")
+            # print(f"Epoch: {epoch} | Score: {env.score} | Best Score: {best_score}")
+
     #endregion  
 
 

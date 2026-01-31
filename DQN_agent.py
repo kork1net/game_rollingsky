@@ -30,8 +30,8 @@ class DQN_agent:
     def action(self, state: State, epoch = None, events= None, train = None):
         
         if not self.is_train:
-            state_tensor = state.toTensor(device=device)
-            state_tensor = state_tensor.view(1, 1, 18, 12).to(device)
+            state_tensor = state.toTensor(device=device, player=self.env.player)
+            state_tensor = state_tensor.view(1, 2, 12, 12).to(device)
 
             with torch.no_grad():
                 q_values = self.DQN(state_tensor)
@@ -40,7 +40,8 @@ class DQN_agent:
             inverse_action_mapping = [-1, 0, 1]
             return inverse_action_mapping[max_index]
         
-        epoch = self.step
+        if epoch is None:
+            epoch = self.step
         epsilon = self.epsilon_greedy(epoch)
         rnd = random.random()
         actions = [-1, 0, 1]
@@ -50,8 +51,8 @@ class DQN_agent:
         
         self.executed += 1
 
-        state_tensor = state.toTensor(device=device)    
-        state_tensor = state_tensor.view(1, 1, 18, 12).to(device)
+        state_tensor = state.toTensor(device=device, player=self.env.player)    
+        state_tensor = state_tensor.view(1, 2, 12, 12).to(device)
 
 
         with torch.no_grad():
@@ -62,8 +63,9 @@ class DQN_agent:
         chosen_action = inverse_action_mapping[max_index]
 
         q_vals = Q_values.cpu().numpy()[0]
-        if (self.step % 100 == 0):
-            print(f"Q-values: left={q_vals[0]:.4f}, center={q_vals[1]:.4f}, right={q_vals[2]:.4f} | max_index: {max_index} | Epoch: {epoch} | Executed {self.executed} actions")
+        if (self.step % 10 == 0):
+            print
+            (f"Q-values: left={q_vals[0]:.4f}, center={q_vals[1]:.4f}, right={q_vals[2]:.4f} | max_index: {max_index} | Epoch: {epoch}")
 
         self.step += 1
 
@@ -78,7 +80,7 @@ class DQN_agent:
                 actions.append(self.action(State.tensorToState(state), train=False))
         return torch.tensor(actions)
 
-    def epsilon_greedy(self, epoch, start = 1.0, final=0.01, decay=1500.0):
+    def epsilon_greedy(self, epoch, start = 1.0, final=0.01, decay=1200.0):
         if epoch > decay:
             return final
         eps = ((start - final) / -decay) * epoch + 1

@@ -189,48 +189,46 @@ class Enviroment:
 
     def play_sound(self, col, row, board):
 
+        if self.render:
+            if board[row, col] == 0 or board[row, col] == 2:
+                if (not self.jumping):
+                    if not self.played_spike_sound:
+                        death.play()
+                    self.played_spike_sound = True
+            else:
+                self.played_spike_sound = False
+
+            if board[row, col] == 3: # boost
+                if (not self.jumping):
+                    if not self.played_boost_sound:
+                        boost_sound.play()
+                    self.played_boost_sound = True
+            else:
+                self.played_boost_sound = False
+            
+            if board[row, col] == 4: # slime
+                if (not self.jumping):
+                    if not self.played_slime_sound:
+                        slime_sound.play()
+                    self.played_slime_sound = True
+            else:
+                self.played_slime_sound = False
+
+            if board[row, col] == 5: # jumper
+                if not self.played_jump_sound:
+                    jump_sound.play()
+                self.played_jump_sound = True
+            else:
+                self.played_jump_sound = False
+            
+            if board[row, col] == 6 or board[row, col] == 7 or board[row, col] == 8: # bonus
+                if (not self.jumping):
+                    if not self.played_bonus_sound:
+                        bonus_sound.play()
+                    self.played_bonus_sound = True
+            else:
+                self.played_bonus_sound = False
         return
-
-        if not self.render:
-            return
-        if board[row, col] == 0 or board[row, col] == 2:
-            if (not self.jumping):
-                if not self.played_spike_sound:
-                    death.play()
-                self.played_spike_sound = True
-        else:
-            self.played_spike_sound = False
-
-        if board[row, col] == 3: # boost
-            if (not self.jumping):
-                if not self.played_boost_sound:
-                    boost_sound.play()
-                self.played_boost_sound = True
-        else:
-            self.played_boost_sound = False
-        
-        if board[row, col] == 4: # slime
-            if (not self.jumping):
-                if not self.played_slime_sound:
-                    slime_sound.play()
-                self.played_slime_sound = True
-        else:
-            self.played_slime_sound = False
-
-        if board[row, col] == 5: # jumper
-            if not self.played_jump_sound:
-                jump_sound.play()
-            self.played_jump_sound = True
-        else:
-            self.played_jump_sound = False
-        
-        if board[row, col] == 6 or board[row, col] == 7 or board[row, col] == 8: # bonus
-            if (not self.jumping):
-                if not self.played_bonus_sound:
-                    bonus_sound.play()
-                self.played_bonus_sound = True
-        else:
-            self.played_bonus_sound = False
 
     def _is_spike_safe(self, col):
         board = self.state.board
@@ -325,6 +323,7 @@ class Enviroment:
 
             # ensure there is not a spike before a jumper:
             if(hole == 1):
+                self.state.board[3, jumper_tile] = 1 # clear spike 2 tiles below jumper
                 if self.state.board[2, jumper_tile] == 2:
                     self.state.board[2, jumper_tile] = 1 
             
@@ -342,19 +341,9 @@ class Enviroment:
 
     def get_reward(self):
         if self.game_over:
-            return -10
+            return -25
         else:
             reward = 0.1
             if self.state.board[self.player.row, self.player.col] == 5:
                 reward += 5  # jumper
-            elif self.state.board[self.player.row, self.player.col] == 4:
-                reward += 0  # slime
-            elif self.state.board[self.player.row, self.player.col] == 3:
-                reward += 0  # boost
-            elif self.state.board[self.player.row, self.player.col] == 6:
-                reward += 10  # bonus 200
-            elif self.state.board[self.player.row, self.player.col] == 7:
-                reward += 15  # bonus 1000
-            elif self.state.board[self.player.row, self.player.col] == 8:
-                reward += 40  # bonus 3000
             return reward
