@@ -8,6 +8,7 @@ from DQN import DQN
 from ReplayBuffer import ReplayBuffer
 import torch
 import os
+import random
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -38,9 +39,9 @@ def main():
 
     epochs = 500000
     start_epoch = 0
-    C = 5000
-    batch = 100
-    learning_rate = 1e-4
+    C = 2000
+    batch = 32
+    learning_rate = 5e-4
     gamma = 0.99
 
     env = Enviroment(State(), render=True)
@@ -74,7 +75,7 @@ def main():
     best_score = 0
 
 
-    #endregion  
+    #endregion   
 
     #region train loop
     for epoch in range(start_epoch, epochs):
@@ -132,6 +133,10 @@ def main():
                 optim.zero_grad()
                 loss.backward()
                 optim.step()
+                
+                if env.step % 100 == 0:
+                    epsilon = player.epsilon_greedy(epoch)
+                    print(f"Step: {env.step} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.4f} | Avg Reward: {rewards.mean().item():.4f}")
 
             if env.step % C == 0:
                 Q_hat.load_state_dict(Q.state_dict())
@@ -148,7 +153,8 @@ def main():
             best_score = env.score
         if epoch % 20 == 0:
             torch.save({'epoch': epoch, 'model_state_dict': Q.state_dict(), 'optimizer_state_dict': optim.state_dict()}, checkpoint_path)
-            # print(f"Epoch: {epoch} | Score: {env.score} | Best Score: {best_score}")
+        if epoch % 25000 == 0:
+            print(f"Epoch: {epoch} | Score: {env.score} | Best Score: {best_score}")
 
     #endregion  
 

@@ -189,6 +189,8 @@ class Enviroment:
 
     def play_sound(self, col, row, board):
 
+        return
+
         if self.render:
             if board[row, col] == 0 or board[row, col] == 2:
                 if (not self.jumping):
@@ -341,7 +343,7 @@ class Enviroment:
 
     def get_reward(self):
         if self.game_over:
-            return -25
+            return -1.0
         else:
             reward = 0.1
             if self.state.board[self.player.row, self.player.col] == 5:

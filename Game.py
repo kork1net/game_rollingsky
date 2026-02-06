@@ -16,9 +16,9 @@ graphics = Graphics()
 env = Enviroment(State())
 
 # player = Human_agent()
-player = DQN_agent(env=env, train=False)
+player = DQN_agent(env=env, train=True)
 
-checkpoint_path = "data/run_002.pth"
+checkpoint_path = "data/run_005.pth"
 
 if isinstance(player, DQN_agent):
     if os.path.exists(checkpoint_path):
@@ -101,7 +101,6 @@ def main():
 
             if not env.game_over and not env.pause:
                 action = player.action(state=env.state, events=events)
-                print(action)
                 env.move(action)
            
             if env.game_over:
