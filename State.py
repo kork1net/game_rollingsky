@@ -15,9 +15,9 @@ class State:
         board = np.zeros((18, 12))
         for x in range(board.shape[0]):
             board[x, 2:6] = 1
-        for x2 in range(8): # manual build of the board
-            if x2 % 2 == 0:
-                board[x2, random.randint(2,5)] = 2
+        # for x2 in range(8): # manual build of the board
+        #     if x2 % 2 == 0:
+        #         board[x2, random.randint(2,5)] = 2
         return board
     
     def tensorToState (state_tensor):

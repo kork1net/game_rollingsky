@@ -92,7 +92,7 @@ def main():
                     return
             action = player.action(state=state, epoch=epoch)
 
-            next_state, reward, done = env.move(action)
+            next_state, reward, done = env.move(action, True)
 
             next_state_tensor = next_state.toTensor(device, env.player)
             
@@ -147,13 +147,13 @@ def main():
                 graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
                 graphics.draw_text("AI", small_text_font, ('black'), 10, 685)
                 pygame.display.update()
-                clock.tick(FPS)
+                clock.tick(240)
         
         if (env.score > best_score):
             best_score = env.score
         if epoch % 20 == 0:
             torch.save({'epoch': epoch, 'model_state_dict': Q.state_dict(), 'optimizer_state_dict': optim.state_dict()}, checkpoint_path)
-        if epoch % 25000 == 0:
+        if epoch % 10 == 0:
             print(f"Epoch: {epoch} | Score: {env.score} | Best Score: {best_score}")
 
     #endregion  

@@ -62,7 +62,7 @@ class Enviroment:
     def play_start_sound(self):
         start_sound.play()
 
-    def move (self, action):
+    def move (self, action, is_agent=False):
 
         self.player.move(action)
         self.hit()
@@ -116,7 +116,10 @@ class Enviroment:
 
         if (self.scroll_offset >= self.tile_size):
             self.scroll_offset = 0
-            self.roll()
+            if not is_agent:
+                self.roll()
+            else:
+                self.rollAgent()
 
         if (self.step % self.score_speed == 0):
             self.score += 1 
@@ -332,6 +335,18 @@ class Enviroment:
         else:
             self.add_all()
 
+    def rollAgent(self):
+
+        # scroll all rows one down
+        self.state.board[1:] = self.state.board[:-1]
+    
+        # new row        
+        self.state.board[0] = 0
+
+        self.state.board[0, self.wait:self.wait + 4] = 1
+        
+
+
     def add_all(self):
         self.add_spikes()
         self.add_boost()
@@ -343,9 +358,12 @@ class Enviroment:
 
     def get_reward(self):
         if self.game_over:
-            return -1.0
+            return -20.0
         else:
             reward = 0.1
             if self.state.board[self.player.row, self.player.col] == 5:
                 reward += 5  # jumper
+            if self.state.board[self.player.row+1, self.player.col] == 2:
+                reward -= 10.0
+            
             return reward
