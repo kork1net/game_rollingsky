@@ -7,7 +7,7 @@ from Human_agent import Human_agent
 from Random_agent import Random_agent
 from DQN_agent import DQN_agent
 import os
-
+#
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 pygame.init()
