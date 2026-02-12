@@ -345,6 +345,22 @@ class Enviroment:
 
         self.state.board[0, self.wait:self.wait + 4] = 1
         
+        self.height_left -= 1
+
+        if self.height_left == 0:
+             
+            self.state.board[0, self.wait:self.wait + 4] = 1
+
+            new_wait = self.wait + self.direction
+
+            if 0 <= new_wait <= 4:
+               self.wait = new_wait
+            else:
+                self.direction *= -1
+
+            self.height_left = random.randint(4, 10)
+
+        
 
 
     def add_all(self):

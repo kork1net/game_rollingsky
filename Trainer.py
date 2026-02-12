@@ -57,7 +57,7 @@ def main():
 
     optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
 
-    checkpoint_path = get_new_run_path("data")
+    checkpoint_path = 'data/run_007.pth'
     print("saving training to:", checkpoint_path)
     
     if os.path.exists(checkpoint_path):
@@ -134,7 +134,7 @@ def main():
                 loss.backward()
                 optim.step()
                 
-                if env.step % 100 == 0:
+                if env.step % 10 == 0:
                     epsilon = player.epsilon_greedy(epoch)
                     print(f"Step: {env.step} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.4f} | Avg Reward: {rewards.mean().item():.4f}")
 
