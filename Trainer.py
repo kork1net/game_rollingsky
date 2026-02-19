@@ -57,11 +57,11 @@ def main():
 
     optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
 
-    checkpoint_path = 'data/run_011.pth'
+    checkpoint_path = 'data/run_015.pth'
     print("saving training to:", checkpoint_path)
     
     if os.path.exists(checkpoint_path):
-        checkpoint = torch.load(checkpoint_path)
+        checkpoint = torch.load(checkpoint_path, map_location=device)
         start_epoch = checkpoint['epoch']+1
         player.DQN.load_state_dict(checkpoint['model_state_dict'])
         player_hat.DQN.load_state_dict(checkpoint['model_state_dict'])

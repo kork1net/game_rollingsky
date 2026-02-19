@@ -356,7 +356,7 @@ class Enviroment:
             new_wait = self.wait + self.direction
 
             if 0 <= new_wait <= 4:
-                self.wait = new_wait
+                 self.wait = new_wait
             else:
                 self.direction *= -1
 
@@ -380,12 +380,20 @@ class Enviroment:
 
         reward = 0.2
 
-        center_col = self.wait + 1.5
+        loc = self.state.board[self.player.row, self.player.col]
+        i = 0
+
+        while i < 7:
+            if self.state.board[self.player.row+2, i] == 1:
+                tilex = i
+                break
+            i += 1
+
+        center_col = tilex + 1.5
         dist = abs(self.player.col - center_col)
 
         reward -= 0.5 * dist
 
-        loc = self.state.board[self.player.row, self.player.col]
 
         if self.state.board[self.player.row - 1, self.player.col] == 2:
             reward -= 0.3
