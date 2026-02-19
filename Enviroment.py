@@ -68,19 +68,19 @@ class Enviroment:
         self.hit()
         self.step += 1
 
-        if (self.score < 500):
-            self.spike_frequency = 15
-        if (100 < self.score < 1000):
-            self.spike_frequency = 11
-        if (1000 < self.score < 2000):
-            self.spike_frequency = 7
-            self.jumper_frequency = 4
-        if (2000 < self.score < 3000):
-            self.spike_frequency = 3
-            self.jumper_frequency = 3
-        if (3000 < self.score):
-            self.spike_frequency = 1
-            self.jumper_frequency = 2
+        # if (self.score < 500):
+        #     self.spike_frequency = 15
+        # if (100 < self.score < 1000):
+        #     self.spike_frequency = 11
+        # if (1000 < self.score < 2000):
+        #     self.spike_frequency = 7
+        #     self.jumper_frequency = 4
+        # if (2000 < self.score < 3000):
+        #     self.spike_frequency = 3
+        #     self.jumper_frequency = 3
+        # if (3000 < self.score):
+        #     self.spike_frequency = 1
+        #     self.jumper_frequency = 2
     
 
         self.boost_counter += 1
@@ -127,6 +127,7 @@ class Enviroment:
         reward = self.get_reward()
         done = self.game_over
         next_state = self.state
+
         return next_state, reward, done
 
 
@@ -344,6 +345,7 @@ class Enviroment:
         self.state.board[0] = 0
 
         self.state.board[0, self.wait:self.wait + 4] = 1
+        # self.add_spikes()
         
         self.height_left -= 1
 
@@ -354,7 +356,7 @@ class Enviroment:
             new_wait = self.wait + self.direction
 
             if 0 <= new_wait <= 4:
-               self.wait = new_wait
+                self.wait = new_wait
             else:
                 self.direction *= -1
 
@@ -375,11 +377,24 @@ class Enviroment:
     def get_reward(self):
         if self.game_over:
             return -20.0
-        else:
-            reward = 0.1
-            if self.state.board[self.player.row, self.player.col] == 5:
-                reward += 5  # jumper
-            if self.state.board[self.player.row+1, self.player.col] == 2:
-                reward -= 10.0
-            
-            return reward
+
+        reward = 0.2
+
+        center_col = self.wait + 1.5
+        dist = abs(self.player.col - center_col)
+
+        reward -= 0.5 * dist
+
+        loc = self.state.board[self.player.row, self.player.col]
+
+        if self.state.board[self.player.row - 1, self.player.col] == 2:
+            reward -= 0.3
+
+        if loc == 5:      # jumper
+            reward += 5.0
+
+        return reward
+    
+
+
+    

@@ -57,7 +57,7 @@ def main():
 
     optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
 
-    checkpoint_path = 'data/run_007.pth'
+    checkpoint_path = 'data/run_011.pth'
     print("saving training to:", checkpoint_path)
     
     if os.path.exists(checkpoint_path):
@@ -83,6 +83,7 @@ def main():
         state = env.reset()
         state_tensor = state.toTensor(device, env.player)
         state_tensor = state_tensor.float()
+        
         done = False
 
         while not done:
@@ -134,7 +135,7 @@ def main():
                 loss.backward()
                 optim.step()
                 
-                if env.step % 10 == 0:
+                if env.step % 100 == 0:
                     epsilon = player.epsilon_greedy(epoch)
                     print(f"Step: {env.step} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.4f} | Avg Reward: {rewards.mean().item():.4f}")
 
@@ -148,6 +149,7 @@ def main():
                 graphics.draw_text("AI", small_text_font, ('black'), 10, 685)
                 pygame.display.update()
                 clock.tick(240)
+
         
         if (env.score > best_score):
             best_score = env.score

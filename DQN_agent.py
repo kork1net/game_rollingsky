@@ -78,7 +78,7 @@ class DQN_agent:
                 actions.append(self.action(State.tensorToState(state), train=False))
         return torch.tensor(actions)
 
-    def epsilon_greedy(self, epoch, start = 1.0, final=0.01, decay=100.0):
+    def epsilon_greedy(self, epoch, start = 1.0, final=0.01, decay=600.0):
         if epoch > decay:
             return final
         eps = ((start - final) / -decay) * epoch + 1

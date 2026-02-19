@@ -4,6 +4,7 @@ import random
 
 class State:
     view_height = 12
+    view_back = 4
     def __init__(self, board = None):
         if board is not None:
             self.board = board
@@ -29,8 +30,8 @@ class State:
 
         if player is not None:
             row = player.row
-            start = row
-            end = row + self.view_height
+            start = max(row - self.view_back, 0)
+            end = start + self.view_height
             board = board[start:end, :]
             
             if board.shape[0] < self.view_height:
@@ -43,11 +44,14 @@ class State:
             
             # add player position channel (one-hot encoded at the player's column in first row)
             player_channel = np.zeros_like(board)
-            player_channel[0, player.col] = 1.0
+            player_row_in_view = min(self.view_back, board.shape[0] - 1)
+            player_channel[player_row_in_view, player.col] = 1.0
             
             # stack board and player position channels
             board = np.stack([board, player_channel], axis=0)
             tensor = torch.tensor(board, dtype=torch.float32, device=device)
+
+            
             return tensor.unsqueeze(0)
         else:
             tensor = torch.tensor(board, dtype=torch.float32, device=device)
