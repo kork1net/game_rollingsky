@@ -15,8 +15,8 @@ clock = pygame.time.Clock()
 graphics = Graphics()
 env = Enviroment(State())
 
-# player = Human_agent()
-player = DQN_agent(env=env, train=True)
+player = Human_agent()
+# player = DQN_agent(env=env, train=True)
 
 checkpoint_path = "data/run_005.pth"
 

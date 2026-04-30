@@ -1,0 +1,14 @@
+saving training to: data\run_027.pth
+Traceback (most recent call last):
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 189, in <module>
+    main()
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 112, in main
+    next_state, reward, done = env.move(action, True)
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Koren\New\game_rollingsky\Enviroment.py", line 127, in move
+    reward = self.get_reward()
+             ^^^^^^^^^^^^^^^^^
+  File "c:\Users\Koren\New\game_rollingsky\Enviroment.py", line 379, in get_reward
+    if loc == 2: # jumper
+       ^^^
+UnboundLocalError: cannot access local variable 'loc' where it is not associated with a value

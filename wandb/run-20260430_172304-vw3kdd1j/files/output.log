@@ -1,0 +1,5 @@
+saving training to: data\run_021.pth
+Epoch: 0 | Score: 10 | Best Score: 10 | Step: 52
+Epoch: 1 | Score: 4 | Best Score: 10 | Step: 22
+Epoch: 2 | Score: 5 | Best Score: 10 | Step: 25
+Epoch: 3 | Score: 12 | Best Score: 12 | Step: 61

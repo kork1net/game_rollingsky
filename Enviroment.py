@@ -51,7 +51,7 @@ class Enviroment:
         self.touched_boost3 = False
 
         self.jumpduration = 35
-        self.spike_frequency = 25 # lower -> more spikes
+        self.spike_frequency = 30 # lower -> more spikes
         self.jumper_frequency = 8
 
         self.score = 0
@@ -294,7 +294,7 @@ class Enviroment:
         self.state.board = self.state.init_board()
         self.player.broken = False
         return self.state
-    
+
 
     def roll(self):
 
@@ -345,7 +345,7 @@ class Enviroment:
         self.state.board[0] = 0
 
         self.state.board[0, self.wait:self.wait + 4] = 1
-        # self.add_spikes()
+        self.add_spikes()
         
         self.height_left -= 1
 
@@ -375,16 +375,21 @@ class Enviroment:
                 
 
     def get_reward(self):
+
         if self.game_over:
             return -20.0
 
         reward = 0.2
 
         loc = self.state.board[self.player.row, self.player.col]
+        if loc == 2:
+            reward -= 5.0
+
         i = 0
+        tilex=self.player.col
 
         while i < 7:
-            if self.state.board[self.player.row+2, i] == 1:
+            if self.state.board[self.player.row-2, i] == 1:
                 tilex = i
                 break
             i += 1
@@ -392,13 +397,12 @@ class Enviroment:
         center_col = tilex + 1.5
         dist = abs(self.player.col - center_col)
 
-        reward -= 0.5 * dist
-
+        reward -= 0.2 * dist
 
         if self.state.board[self.player.row - 1, self.player.col] == 2:
-            reward -= 0.3
-
-        if loc == 5:      # jumper
+            reward -= 0.5
+        
+        if loc == 5: # jumper
             reward += 5.0
 
         return reward

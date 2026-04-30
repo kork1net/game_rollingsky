@@ -9,6 +9,7 @@ from ReplayBuffer import ReplayBuffer
 import torch
 import os
 import random
+import wandb
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -44,6 +45,19 @@ def main():
     learning_rate = 5e-4
     gamma = 0.99
 
+    import wandb
+
+    wandb.init(
+    project="rolling_sky_ai",
+    config={
+        "epochs": epochs,
+        "batch": batch,
+        "lr": learning_rate,
+        "gamma": gamma,
+        "C": C
+    }
+    )
+
     env = Enviroment(State(), render=True)
 
     player = DQN_agent(env=env, train=True)
@@ -57,7 +71,7 @@ def main():
 
     optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
 
-    checkpoint_path = 'data/run_015.pth'
+    checkpoint_path = 'data/run_026.pth'
     print("saving training to:", checkpoint_path)
     
     if os.path.exists(checkpoint_path):
@@ -67,6 +81,8 @@ def main():
         player_hat.DQN.load_state_dict(checkpoint['model_state_dict'])
         optim.load_state_dict(checkpoint['optimizer_state_dict'])
         Q_hat.load_state_dict(checkpoint['model_state_dict'])
+        # Reset start_epoch to 0 to restart epsilon from the beginning
+        start_epoch = 0
 
     player_hat.DQN = Q_hat
 
@@ -134,10 +150,18 @@ def main():
                 optim.zero_grad()
                 loss.backward()
                 optim.step()
-                
+
                 if env.step % 100 == 0:
-                    epsilon = player.epsilon_greedy(epoch)
-                    print(f"Step: {env.step} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.4f} | Avg Reward: {rewards.mean().item():.4f}")
+                    wandb.log({
+                        "loss": loss.item(),
+                        "reward_avg": rewards.mean().item(),
+                        "score": env.score,
+                        "epsilon": player.epsilon_greedy(epoch)
+                    })
+
+                # if env.step % 100 == 0:
+                #     epsilon = player.epsilon_greedy(epoch)
+                #     print(f"Step: {env.step} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.4f} | Avg Reward: {rewards.mean().item():.4f}")
 
             if env.step % C == 0:
                 Q_hat.load_state_dict(Q.state_dict())
@@ -155,8 +179,8 @@ def main():
             best_score = env.score
         if epoch % 20 == 0:
             torch.save({'epoch': epoch, 'model_state_dict': Q.state_dict(), 'optimizer_state_dict': optim.state_dict()}, checkpoint_path)
-        if epoch % 10 == 0:
-            print(f"Epoch: {epoch} | Score: {env.score} | Best Score: {best_score}")
+        if epoch % 1 == 0:
+            print(f"Epoch: {epoch} | Score: {env.score} | Best Score: {best_score} | Step: {env.step}")
 
     #endregion  
 

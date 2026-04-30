@@ -1,0 +1,32 @@
+saving training to: data/run_016.pth
+c:\Users\Koren\New\game_rollingsky\Trainer.py:78: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(checkpoint_path, map_location=device)
+Epoch: 1201 | Score: 97 | Best Score: 97 | Step: 486
+Epoch: 1202 | Score: 68 | Best Score: 97 | Step: 340
+Epoch: 1203 | Score: 97 | Best Score: 97 | Step: 487
+Epoch: 1204 | Score: 21 | Best Score: 97 | Step: 107
+Epoch: 1205 | Score: 97 | Best Score: 97 | Step: 487
+Epoch: 1206 | Score: 79 | Best Score: 97 | Step: 398
+Epoch: 1207 | Score: 95 | Best Score: 97 | Step: 477
+Epoch: 1208 | Score: 97 | Best Score: 97 | Step: 487
+Epoch: 1209 | Score: 69 | Best Score: 97 | Step: 347
+Epoch: 1210 | Score: 109 | Best Score: 109 | Step: 547
+Epoch: 1211 | Score: 95 | Best Score: 109 | Step: 477
+Epoch: 1212 | Score: 25 | Best Score: 109 | Step: 128
+Epoch: 1213 | Score: 47 | Best Score: 109 | Step: 237
+Epoch: 1214 | Score: 40 | Best Score: 109 | Step: 201
+Epoch: 1215 | Score: 55 | Best Score: 109 | Step: 277
+Epoch: 1216 | Score: 68 | Best Score: 109 | Step: 341
+Epoch: 1217 | Score: 80 | Best Score: 109 | Step: 404
+Epoch: 1218 | Score: 78 | Best Score: 109 | Step: 391
+Epoch: 1219 | Score: 27 | Best Score: 109 | Step: 137
+Epoch: 1220 | Score: 67 | Best Score: 109 | Step: 338
+Epoch: 1221 | Score: 26 | Best Score: 109 | Step: 131
+Epoch: 1222 | Score: 193 | Best Score: 193 | Step: 967
+Epoch: 1223 | Score: 134 | Best Score: 193 | Step: 673
+Epoch: 1224 | Score: 47 | Best Score: 193 | Step: 238
+Epoch: 1225 | Score: 32 | Best Score: 193 | Step: 160
+Epoch: 1226 | Score: 22 | Best Score: 193 | Step: 114
+Epoch: 1227 | Score: 28 | Best Score: 193 | Step: 140
+Epoch: 1228 | Score: 69 | Best Score: 193 | Step: 348
+Epoch: 1229 | Score: 27 | Best Score: 193 | Step: 139

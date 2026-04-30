@@ -1,0 +1,30 @@
+{"time":"2026-04-30T18:17:34.5173298+03:00","level":"INFO","msg":"wandb-core"}
+{"time":"2026-04-30T18:17:34.5178345+03:00","level":"INFO","msg":"stream: starting","core version":"0.26.1"}
+{"time":"2026-04-30T18:17:34.8816836+03:00","level":"INFO","msg":"stream: created new stream","id":"qsx5rpbp"}
+{"time":"2026-04-30T18:17:34.8816836+03:00","level":"INFO","msg":"handler: started"}
+{"time":"2026-04-30T18:17:34.8833206+03:00","level":"INFO","msg":"stream: started"}
+{"time":"2026-04-30T18:17:34.8833206+03:00","level":"INFO","msg":"sender: started"}
+{"time":"2026-04-30T18:17:34.8833206+03:00","level":"INFO","msg":"writer: started","stream_id":"qsx5rpbp"}
+{"time":"2026-04-30T18:17:36.3708558+03:00","level":"INFO","msg":"filestream: sending request","total_files":1,"console_offset":0,"console_lines":1}
+{"time":"2026-04-30T18:17:36.7096743+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:17:51.3714212+03:00","level":"INFO","msg":"filestream: sending request","total_files":4,"history_offset":0,"history_lines":16,"events_offset":0,"events_lines":2,"console_offset":0,"console_lines":11,"uploaded_len":2}
+{"time":"2026-04-30T18:17:51.7451371+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:18:06.37097+03:00","level":"INFO","msg":"filestream: sending request","total_files":4,"history_offset":16,"history_lines":16,"events_offset":2,"events_lines":2,"console_offset":11,"console_lines":8}
+{"time":"2026-04-30T18:18:06.6605933+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:18:21.3714962+03:00","level":"INFO","msg":"filestream: sending request","total_files":4,"history_offset":32,"history_lines":17,"events_offset":4,"events_lines":2,"console_offset":19,"console_lines":7}
+{"time":"2026-04-30T18:18:21.6939474+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:18:36.3710818+03:00","level":"INFO","msg":"filestream: sending request","total_files":4,"history_offset":49,"history_lines":15,"events_offset":6,"events_lines":2,"console_offset":26,"console_lines":9}
+{"time":"2026-04-30T18:18:36.6894874+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:18:51.3710568+03:00","level":"INFO","msg":"filestream: sending request","total_files":4,"history_offset":64,"history_lines":17,"events_offset":8,"events_lines":2,"console_offset":35,"console_lines":8}
+{"time":"2026-04-30T18:18:51.7211447+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:19:06.3709285+03:00","level":"INFO","msg":"filestream: sending request","total_files":4,"history_offset":81,"history_lines":17,"events_offset":10,"events_lines":2,"console_offset":43,"console_lines":5}
+{"time":"2026-04-30T18:19:06.631428+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:19:21.3711363+03:00","level":"INFO","msg":"filestream: sending request","total_files":4,"history_offset":98,"history_lines":17,"events_offset":12,"events_lines":2,"console_offset":48,"console_lines":8}
+{"time":"2026-04-30T18:19:21.6367743+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:19:22.9048282+03:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2026-04-30T18:19:22.9048282+03:00","level":"INFO","msg":"filestream: sending request","total_files":3,"history_offset":115,"history_lines":1,"console_offset":56,"console_lines":1,"uploaded_len":3,"complete":true,"exit_code":0}
+{"time":"2026-04-30T18:19:23.1837285+03:00","level":"INFO","msg":"filestream: request sent","status":"200 OK"}
+{"time":"2026-04-30T18:19:23.1837285+03:00","level":"INFO","msg":"stream: finishing up"}
+{"time":"2026-04-30T18:19:23.1837285+03:00","level":"INFO","msg":"handler: closed"}
+{"time":"2026-04-30T18:19:23.1837285+03:00","level":"INFO","msg":"sender: closed"}
+{"time":"2026-04-30T18:19:23.1837285+03:00","level":"INFO","msg":"stream: all finished"}

@@ -1,0 +1,14 @@
+saving training to: data\run_024.pth
+Traceback (most recent call last):
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 187, in <module>
+    main()
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 110, in main
+    next_state, reward, done = env.move(action, True)
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Koren\New\game_rollingsky\Enviroment.py", line 127, in move
+    reward = self.get_reward()
+             ^^^^^^^^^^^^^^^^^
+  File "c:\Users\Koren\New\game_rollingsky\Enviroment.py", line 378, in get_reward
+    row = self.get_player_board_row()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Enviroment' object has no attribute 'get_player_board_row'
