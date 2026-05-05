@@ -1,0 +1,17 @@
+{
+  "os":  "Windows-11-10.0.26200-SP0",
+  "python":  "CPython 3.12.4",
+  "startedAt":  "2026-05-03T16:24:34.359499Z",
+  "program":  "C:\\Users\\Koren\\New\\game_rollingsky\\Trainer.py",
+  "codePath":  "Trainer.py",
+  "codePathLocal":  "Trainer.py",
+  "git":  {
+    "remote":  "https://github.com/kork1net/game_rollingsky.git",
+    "commit":  "374aff523a8fd261d696d7b647959a32b759390b"
+  },
+  "email":  "korkinet11122@gmail.com",
+  "root":  "C:\\Users\\Koren\\New\\game_rollingsky",
+  "host":  "Koren-Pc",
+  "executable":  "C:\\Users\\Koren\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "writerId":  "d6a8p1zwkubq7eog53qmdtyowe8jlvsw"
+}

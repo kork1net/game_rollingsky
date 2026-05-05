@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\Koren\New\game_rollingsky\Trainer.py", line 197, in <module>
+    main()
+  File "C:\Users\Koren\New\game_rollingsky\Trainer.py", line 61, in main
+    env = Enviroment(State(), render=True, difficulty=0.5)  # Start with easy difficulty
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Enviroment.__init__() got an unexpected keyword argument 'difficulty'

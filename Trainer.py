@@ -41,8 +41,8 @@ def main():
     epochs = 500000
     start_epoch = 0
     C = 2000
-    batch = 32
-    learning_rate = 5e-4
+    batch = 32  
+    learning_rate = 0.0005
     gamma = 0.99
 
     import wandb
@@ -71,7 +71,7 @@ def main():
 
     optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
 
-    checkpoint_path = 'data/run_026.pth'
+    checkpoint_path = 'data/run_047.pth'
     print("saving training to:", checkpoint_path)
     
     if os.path.exists(checkpoint_path):
@@ -81,8 +81,8 @@ def main():
         player_hat.DQN.load_state_dict(checkpoint['model_state_dict'])
         optim.load_state_dict(checkpoint['optimizer_state_dict'])
         Q_hat.load_state_dict(checkpoint['model_state_dict'])
-        # Reset start_epoch to 0 to restart epsilon from the beginning
-        start_epoch = 0
+        # reset start_epoch to 0 to restart epsilon from the beginning
+        # start_epoch = 0
 
     player_hat.DQN = Q_hat
 
@@ -170,7 +170,6 @@ def main():
                 graphics(env)
                 graphics.main_img_call(True)
                 graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
-                graphics.draw_text("AI", small_text_font, ('black'), 10, 685)
                 pygame.display.update()
                 clock.tick(240)
 

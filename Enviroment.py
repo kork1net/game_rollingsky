@@ -1,4 +1,5 @@
 import random
+import numpy as np
 import pygame
 from Player import Player
 from State import State
@@ -58,6 +59,7 @@ class Enviroment:
         self.score_speed = 5 #############
         self.game_over = False
         self.pause = False
+        self.died_from_spike = False  # Track if death was caused by spike
     
     def play_start_sound(self):
         start_sound.play()
@@ -148,11 +150,13 @@ class Enviroment:
         if tile_id == 0:
             if not self.jumping:
                 self.game_over = True
+                self.died_from_spike = False
                 self.player.broken = True
 
-        elif tile_id == 2:  # ספייק
+        elif tile_id == 2:  # ספייק (Spike)
             if not self.jumping:
                 self.game_over = True
+                self.died_from_spike = True  # Track that death was from spike
                 self.player.broken = True
 
         elif tile_id == 3:  # בוסט
@@ -293,6 +297,7 @@ class Enviroment:
         self.__init__(self.state, render=self.render)
         self.state.board = self.state.init_board()
         self.player.broken = False
+        self.died_from_spike = False  # Reset spike death flag
         return self.state
 
 
@@ -375,37 +380,38 @@ class Enviroment:
                 
 
     def get_reward(self):
-
         if self.game_over:
-            return -20.0
+            return -50
+        reward = 0.5
 
-        reward = 0.2
+        row = self.player.row
+        col = self.player.col
+        board = self.state.board
 
-        loc = self.state.board[self.player.row, self.player.col]
-        if loc == 2:
-            reward -= 5.0
+        # i = 0
+        # tilex = self.player.col
 
-        i = 0
-        tilex=self.player.col
+        # while i < 7:
+        #     if self.state.board[self.player.row-2, i] == 1:
+        #         tilex = i
+        #         break
+        #     i += 1
 
-        while i < 7:
-            if self.state.board[self.player.row-2, i] == 1:
-                tilex = i
-                break
-            i += 1
+        # center_col = tilex + 1.5
+        # dist = abs(self.player.col - center_col)
 
-        center_col = tilex + 1.5
-        dist = abs(self.player.col - center_col)
+        # reward -= 0.5 * dist
 
-        reward -= 0.2 * dist
+        if row - 1 >= 0 and board[row - 1, col] == 2:
+            reward -= 8.0
 
-        if self.state.board[self.player.row - 1, self.player.col] == 2:
-            reward -= 0.5
-        
-        if loc == 5: # jumper
-            reward += 5.0
+        if row - 2 >= 0 and board[row - 2, col] == 2:
+            reward -= 4.0
+
 
         return reward
+
+
     
 
 

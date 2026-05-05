@@ -1,0 +1,471 @@
+saving training to: data\run_039.pth
+e
+Epoch: 0 | Score: 4 | Best Score: 4 | Step: 23
+e
+Epoch: 1 | Score: 0 | Best Score: 4 | Step: 4
+e
+Epoch: 2 | Score: 2 | Best Score: 4 | Step: 11
+e
+Epoch: 3 | Score: 1 | Best Score: 4 | Step: 8
+e
+Epoch: 4 | Score: 1 | Best Score: 4 | Step: 5
+e
+Epoch: 5 | Score: 1 | Best Score: 4 | Step: 5
+e
+Epoch: 6 | Score: 0 | Best Score: 4 | Step: 4
+e
+Epoch: 7 | Score: 2 | Best Score: 4 | Step: 12
+e
+Epoch: 8 | Score: 0 | Best Score: 4 | Step: 4
+e
+Epoch: 9 | Score: 1 | Best Score: 4 | Step: 5
+e
+Epoch: 10 | Score: 1 | Best Score: 4 | Step: 5
+e
+Epoch: 11 | Score: 0 | Best Score: 4 | Step: 3
+e
+Epoch: 12 | Score: 6 | Best Score: 6 | Step: 33
+e
+Epoch: 13 | Score: 0 | Best Score: 6 | Step: 3
+e
+Epoch: 14 | Score: 0 | Best Score: 6 | Step: 2
+e
+Epoch: 15 | Score: 0 | Best Score: 6 | Step: 2
+e
+Epoch: 16 | Score: 0 | Best Score: 6 | Step: 4
+e
+Epoch: 17 | Score: 0 | Best Score: 6 | Step: 2
+e
+Epoch: 18 | Score: 1 | Best Score: 6 | Step: 6
+e
+Epoch: 19 | Score: 1 | Best Score: 6 | Step: 9
+e
+Epoch: 20 | Score: 2 | Best Score: 6 | Step: 12
+e
+Epoch: 21 | Score: 2 | Best Score: 6 | Step: 13
+e
+Epoch: 22 | Score: 2 | Best Score: 6 | Step: 10
+e
+Epoch: 23 | Score: 9 | Best Score: 9 | Step: 48
+e
+Epoch: 24 | Score: 3 | Best Score: 9 | Step: 17
+e
+Epoch: 25 | Score: 1 | Best Score: 9 | Step: 6
+e
+Epoch: 26 | Score: 2 | Best Score: 9 | Step: 13
+e
+Epoch: 27 | Score: 0 | Best Score: 9 | Step: 2
+e
+Epoch: 28 | Score: 2 | Best Score: 9 | Step: 12
+e
+Epoch: 29 | Score: 0 | Best Score: 9 | Step: 2
+e
+Epoch: 30 | Score: 2 | Best Score: 9 | Step: 13
+e
+Epoch: 31 | Score: 1 | Best Score: 9 | Step: 6
+e
+Epoch: 32 | Score: 2 | Best Score: 9 | Step: 10
+e
+Epoch: 33 | Score: 1 | Best Score: 9 | Step: 5
+e
+Epoch: 34 | Score: 1 | Best Score: 9 | Step: 5
+e
+Epoch: 35 | Score: 1 | Best Score: 9 | Step: 8
+e
+Epoch: 36 | Score: 6 | Best Score: 9 | Step: 32
+e
+Epoch: 37 | Score: 0 | Best Score: 9 | Step: 4
+e
+Epoch: 38 | Score: 5 | Best Score: 9 | Step: 29
+e
+Epoch: 39 | Score: 2 | Best Score: 9 | Step: 12
+e
+Epoch: 40 | Score: 1 | Best Score: 9 | Step: 5
+e
+Epoch: 41 | Score: 2 | Best Score: 9 | Step: 12
+e
+Epoch: 42 | Score: 5 | Best Score: 9 | Step: 26
+e
+Epoch: 43 | Score: 0 | Best Score: 9 | Step: 3
+e
+Epoch: 44 | Score: 0 | Best Score: 9 | Step: 2
+e
+Epoch: 45 | Score: 0 | Best Score: 9 | Step: 4
+e
+Epoch: 46 | Score: 3 | Best Score: 9 | Step: 16
+e
+Epoch: 47 | Score: 1 | Best Score: 9 | Step: 7
+e
+Epoch: 48 | Score: 4 | Best Score: 9 | Step: 21
+e
+Epoch: 49 | Score: 1 | Best Score: 9 | Step: 6
+e
+Epoch: 50 | Score: 3 | Best Score: 9 | Step: 17
+e
+Epoch: 51 | Score: 0 | Best Score: 9 | Step: 4
+e
+Epoch: 52 | Score: 2 | Best Score: 9 | Step: 11
+e
+Epoch: 53 | Score: 4 | Best Score: 9 | Step: 24
+e
+Epoch: 54 | Score: 3 | Best Score: 9 | Step: 17
+e
+Epoch: 55 | Score: 1 | Best Score: 9 | Step: 7
+e
+Epoch: 56 | Score: 1 | Best Score: 9 | Step: 8
+e
+Epoch: 57 | Score: 6 | Best Score: 9 | Step: 30
+e
+Epoch: 58 | Score: 4 | Best Score: 9 | Step: 24
+e
+Epoch: 59 | Score: 0 | Best Score: 9 | Step: 4
+e
+Epoch: 60 | Score: 2 | Best Score: 9 | Step: 10
+e
+Epoch: 61 | Score: 3 | Best Score: 9 | Step: 17
+e
+Epoch: 62 | Score: 2 | Best Score: 9 | Step: 11
+e
+Epoch: 63 | Score: 5 | Best Score: 9 | Step: 28
+e
+Epoch: 64 | Score: 7 | Best Score: 9 | Step: 37
+e
+Epoch: 65 | Score: 1 | Best Score: 9 | Step: 5
+e
+Epoch: 66 | Score: 2 | Best Score: 9 | Step: 13
+e
+Epoch: 67 | Score: 1 | Best Score: 9 | Step: 7
+e
+Epoch: 68 | Score: 8 | Best Score: 9 | Step: 41
+e
+Epoch: 69 | Score: 1 | Best Score: 9 | Step: 7
+e
+Epoch: 70 | Score: 0 | Best Score: 9 | Step: 3
+e
+Epoch: 71 | Score: 0 | Best Score: 9 | Step: 4
+e
+Epoch: 72 | Score: 2 | Best Score: 9 | Step: 11
+e
+Epoch: 73 | Score: 0 | Best Score: 9 | Step: 2
+e
+Epoch: 74 | Score: 3 | Best Score: 9 | Step: 19
+e
+Epoch: 75 | Score: 2 | Best Score: 9 | Step: 11
+e
+Epoch: 76 | Score: 2 | Best Score: 9 | Step: 11
+e
+Epoch: 77 | Score: 0 | Best Score: 9 | Step: 2
+e
+Epoch: 78 | Score: 1 | Best Score: 9 | Step: 9
+e
+Epoch: 79 | Score: 1 | Best Score: 9 | Step: 6
+e
+Epoch: 80 | Score: 2 | Best Score: 9 | Step: 13
+e
+Epoch: 81 | Score: 8 | Best Score: 9 | Step: 44
+e
+Epoch: 82 | Score: 5 | Best Score: 9 | Step: 27
+e
+Epoch: 83 | Score: 0 | Best Score: 9 | Step: 2
+e
+Epoch: 84 | Score: 3 | Best Score: 9 | Step: 19
+e
+Epoch: 85 | Score: 3 | Best Score: 9 | Step: 16
+e
+Epoch: 86 | Score: 0 | Best Score: 9 | Step: 2
+e
+Epoch: 87 | Score: 9 | Best Score: 9 | Step: 45
+e
+Epoch: 88 | Score: 1 | Best Score: 9 | Step: 7
+e
+Epoch: 89 | Score: 1 | Best Score: 9 | Step: 7
+e
+Epoch: 90 | Score: 0 | Best Score: 9 | Step: 2
+e
+Epoch: 91 | Score: 3 | Best Score: 9 | Step: 15
+e
+Epoch: 92 | Score: 5 | Best Score: 9 | Step: 26
+e
+Epoch: 93 | Score: 2 | Best Score: 9 | Step: 10
+e
+Epoch: 94 | Score: 5 | Best Score: 9 | Step: 27
+e
+Epoch: 95 | Score: 2 | Best Score: 9 | Step: 11
+e
+Epoch: 96 | Score: 2 | Best Score: 9 | Step: 10
+e
+Epoch: 97 | Score: 1 | Best Score: 9 | Step: 7
+e
+Epoch: 98 | Score: 3 | Best Score: 9 | Step: 15
+e
+Epoch: 99 | Score: 1 | Best Score: 9 | Step: 5
+e
+Epoch: 100 | Score: 3 | Best Score: 9 | Step: 17
+e
+Epoch: 101 | Score: 1 | Best Score: 9 | Step: 5
+e
+Epoch: 102 | Score: 4 | Best Score: 9 | Step: 20
+e
+Epoch: 103 | Score: 4 | Best Score: 9 | Step: 20
+e
+Epoch: 104 | Score: 3 | Best Score: 9 | Step: 18
+e
+Epoch: 105 | Score: 2 | Best Score: 9 | Step: 12
+e
+Epoch: 106 | Score: 2 | Best Score: 9 | Step: 14
+e
+Epoch: 107 | Score: 6 | Best Score: 9 | Step: 34
+e
+Epoch: 108 | Score: 3 | Best Score: 9 | Step: 18
+e
+Epoch: 109 | Score: 10 | Best Score: 10 | Step: 52
+e
+Epoch: 110 | Score: 0 | Best Score: 10 | Step: 4
+e
+Epoch: 111 | Score: 6 | Best Score: 10 | Step: 31
+e
+Epoch: 112 | Score: 1 | Best Score: 10 | Step: 7
+e
+Epoch: 113 | Score: 5 | Best Score: 10 | Step: 25
+e
+Epoch: 114 | Score: 13 | Best Score: 13 | Step: 69
+e
+Epoch: 115 | Score: 6 | Best Score: 13 | Step: 32
+e
+Epoch: 116 | Score: 1 | Best Score: 13 | Step: 6
+e
+Epoch: 117 | Score: 1 | Best Score: 13 | Step: 7
+e
+Epoch: 118 | Score: 2 | Best Score: 13 | Step: 11
+e
+Epoch: 119 | Score: 4 | Best Score: 13 | Step: 22
+e
+Epoch: 120 | Score: 3 | Best Score: 13 | Step: 19
+e
+Epoch: 121 | Score: 16 | Best Score: 16 | Step: 81
+e
+Epoch: 122 | Score: 20 | Best Score: 20 | Step: 102
+e
+Epoch: 123 | Score: 1 | Best Score: 20 | Step: 9
+e
+Epoch: 124 | Score: 8 | Best Score: 20 | Step: 44
+e
+Epoch: 125 | Score: 1 | Best Score: 20 | Step: 6
+e
+Epoch: 126 | Score: 1 | Best Score: 20 | Step: 5
+e
+Epoch: 127 | Score: 2 | Best Score: 20 | Step: 14
+e
+Epoch: 128 | Score: 2 | Best Score: 20 | Step: 12
+e
+Epoch: 129 | Score: 2 | Best Score: 20 | Step: 13
+e
+Epoch: 130 | Score: 2 | Best Score: 20 | Step: 11
+e
+Epoch: 131 | Score: 7 | Best Score: 20 | Step: 36
+e
+Epoch: 132 | Score: 2 | Best Score: 20 | Step: 10
+e
+Epoch: 133 | Score: 9 | Best Score: 20 | Step: 46
+e
+Epoch: 134 | Score: 2 | Best Score: 20 | Step: 14
+e
+Epoch: 135 | Score: 1 | Best Score: 20 | Step: 5
+e
+Epoch: 136 | Score: 2 | Best Score: 20 | Step: 13
+e
+Epoch: 137 | Score: 1 | Best Score: 20 | Step: 9
+e
+Epoch: 138 | Score: 1 | Best Score: 20 | Step: 7
+e
+Epoch: 139 | Score: 2 | Best Score: 20 | Step: 12
+e
+Epoch: 140 | Score: 3 | Best Score: 20 | Step: 19
+e
+Epoch: 141 | Score: 3 | Best Score: 20 | Step: 16
+e
+Epoch: 142 | Score: 0 | Best Score: 20 | Step: 3
+e
+Epoch: 143 | Score: 2 | Best Score: 20 | Step: 12
+e
+Epoch: 144 | Score: 4 | Best Score: 20 | Step: 21
+e
+Epoch: 145 | Score: 3 | Best Score: 20 | Step: 15
+e
+Epoch: 146 | Score: 1 | Best Score: 20 | Step: 6
+e
+Epoch: 147 | Score: 8 | Best Score: 20 | Step: 44
+e
+Epoch: 148 | Score: 0 | Best Score: 20 | Step: 2
+e
+Epoch: 149 | Score: 10 | Best Score: 20 | Step: 52
+e
+Epoch: 150 | Score: 0 | Best Score: 20 | Step: 4
+e
+Epoch: 151 | Score: 0 | Best Score: 20 | Step: 2
+e
+Epoch: 152 | Score: 6 | Best Score: 20 | Step: 32
+e
+Epoch: 153 | Score: 4 | Best Score: 20 | Step: 24
+e
+Epoch: 154 | Score: 1 | Best Score: 20 | Step: 9
+e
+Epoch: 155 | Score: 0 | Best Score: 20 | Step: 3
+e
+Epoch: 156 | Score: 18 | Best Score: 20 | Step: 93
+e
+Epoch: 157 | Score: 6 | Best Score: 20 | Step: 34
+e
+Epoch: 158 | Score: 1 | Best Score: 20 | Step: 7
+e
+Epoch: 159 | Score: 4 | Best Score: 20 | Step: 24
+e
+Epoch: 160 | Score: 18 | Best Score: 20 | Step: 92
+e
+Epoch: 161 | Score: 3 | Best Score: 20 | Step: 18
+e
+Epoch: 162 | Score: 27 | Best Score: 27 | Step: 135
+e
+Epoch: 163 | Score: 10 | Best Score: 27 | Step: 52
+e
+Epoch: 164 | Score: 12 | Best Score: 27 | Step: 63
+e
+Epoch: 165 | Score: 22 | Best Score: 27 | Step: 110
+e
+Epoch: 166 | Score: 0 | Best Score: 27 | Step: 3
+e
+Epoch: 167 | Score: 14 | Best Score: 27 | Step: 74
+e
+Epoch: 168 | Score: 9 | Best Score: 27 | Step: 48
+e
+Epoch: 169 | Score: 18 | Best Score: 27 | Step: 90
+e
+Epoch: 170 | Score: 13 | Best Score: 27 | Step: 69
+e
+Epoch: 171 | Score: 23 | Best Score: 27 | Step: 119
+e
+Epoch: 172 | Score: 5 | Best Score: 27 | Step: 25
+e
+Epoch: 173 | Score: 9 | Best Score: 27 | Step: 45
+e
+Epoch: 174 | Score: 12 | Best Score: 27 | Step: 60
+e
+Epoch: 175 | Score: 9 | Best Score: 27 | Step: 49
+e
+Epoch: 176 | Score: 3 | Best Score: 27 | Step: 19
+e
+Epoch: 177 | Score: 0 | Best Score: 27 | Step: 4
+e
+Epoch: 178 | Score: 4 | Best Score: 27 | Step: 21
+e
+Epoch: 179 | Score: 9 | Best Score: 27 | Step: 48
+e
+Epoch: 180 | Score: 5 | Best Score: 27 | Step: 27
+e
+Epoch: 181 | Score: 12 | Best Score: 27 | Step: 64
+e
+Epoch: 182 | Score: 1 | Best Score: 27 | Step: 7
+e
+Epoch: 183 | Score: 23 | Best Score: 27 | Step: 116
+e
+Epoch: 184 | Score: 11 | Best Score: 27 | Step: 57
+e
+Epoch: 185 | Score: 1 | Best Score: 27 | Step: 5
+e
+Epoch: 186 | Score: 16 | Best Score: 27 | Step: 82
+e
+Epoch: 187 | Score: 3 | Best Score: 27 | Step: 15
+e
+Epoch: 188 | Score: 2 | Best Score: 27 | Step: 14
+e
+Epoch: 189 | Score: 6 | Best Score: 27 | Step: 34
+e
+Epoch: 190 | Score: 16 | Best Score: 27 | Step: 80
+e
+Epoch: 191 | Score: 6 | Best Score: 27 | Step: 34
+e
+Epoch: 192 | Score: 24 | Best Score: 27 | Step: 121
+e
+Epoch: 193 | Score: 17 | Best Score: 27 | Step: 85
+e
+Epoch: 194 | Score: 10 | Best Score: 27 | Step: 53
+e
+Epoch: 195 | Score: 21 | Best Score: 27 | Step: 108
+e
+Epoch: 196 | Score: 32 | Best Score: 32 | Step: 164
+e
+Epoch: 197 | Score: 28 | Best Score: 32 | Step: 142
+e
+Epoch: 198 | Score: 26 | Best Score: 32 | Step: 131
+e
+Epoch: 199 | Score: 20 | Best Score: 32 | Step: 101
+e
+Epoch: 200 | Score: 1 | Best Score: 32 | Step: 6
+e
+Epoch: 201 | Score: 3 | Best Score: 32 | Step: 19
+e
+Epoch: 202 | Score: 6 | Best Score: 32 | Step: 32
+e
+Epoch: 203 | Score: 6 | Best Score: 32 | Step: 31
+e
+Epoch: 204 | Score: 2 | Best Score: 32 | Step: 11
+e
+Epoch: 205 | Score: 1 | Best Score: 32 | Step: 6
+e
+Epoch: 206 | Score: 5 | Best Score: 32 | Step: 25
+e
+Epoch: 207 | Score: 17 | Best Score: 32 | Step: 89
+e
+Epoch: 208 | Score: 13 | Best Score: 32 | Step: 69
+e
+Epoch: 209 | Score: 43 | Best Score: 43 | Step: 217
+e
+Epoch: 210 | Score: 10 | Best Score: 43 | Step: 51
+e
+Epoch: 211 | Score: 3 | Best Score: 43 | Step: 16
+e
+Epoch: 212 | Score: 38 | Best Score: 43 | Step: 192
+e
+Epoch: 213 | Score: 7 | Best Score: 43 | Step: 35
+e
+Epoch: 214 | Score: 6 | Best Score: 43 | Step: 31
+e
+Epoch: 215 | Score: 30 | Best Score: 43 | Step: 152
+e
+Epoch: 216 | Score: 13 | Best Score: 43 | Step: 66
+e
+Epoch: 217 | Score: 34 | Best Score: 43 | Step: 174
+e
+Epoch: 218 | Score: 13 | Best Score: 43 | Step: 65
+e
+Epoch: 219 | Score: 27 | Best Score: 43 | Step: 137
+e
+Epoch: 220 | Score: 31 | Best Score: 43 | Step: 159
+e
+Epoch: 221 | Score: 1 | Best Score: 43 | Step: 6
+e
+Epoch: 222 | Score: 12 | Best Score: 43 | Step: 62
+e
+Epoch: 223 | Score: 9 | Best Score: 43 | Step: 46
+e
+Epoch: 224 | Score: 27 | Best Score: 43 | Step: 137
+e
+Epoch: 225 | Score: 32 | Best Score: 43 | Step: 160
+e
+Epoch: 226 | Score: 69 | Best Score: 69 | Step: 349
+e
+Epoch: 227 | Score: 29 | Best Score: 69 | Step: 145
+e
+Epoch: 228 | Score: 60 | Best Score: 69 | Step: 301
+e
+Epoch: 229 | Score: 10 | Best Score: 69 | Step: 50
+e
+Epoch: 230 | Score: 2 | Best Score: 69 | Step: 11
+e
+Epoch: 231 | Score: 2 | Best Score: 69 | Step: 12
+e
+Epoch: 232 | Score: 3 | Best Score: 69 | Step: 15
+e
+Epoch: 233 | Score: 11 | Best Score: 69 | Step: 57
+e
+Epoch: 234 | Score: 13 | Best Score: 69 | Step: 69

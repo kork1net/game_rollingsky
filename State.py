@@ -16,6 +16,7 @@ class State:
         board = np.zeros((18, 12))
         for x in range(board.shape[0]):
             board[x, 2:6] = 1
+            # board[x, 0:8] = 1
         # for x2 in range(8): # manual build of the board
         #     if x2 % 2 == 0:
         #         board[x2, random.randint(2,5)] = 2
@@ -24,6 +25,18 @@ class State:
     def tensorToState (state_tensor):
         board = state_tensor.reshape([18,12]).cpu().numpy()
         return State(board)
+    
+    def print_board(self):
+        print("Board state:")
+        print("   ", end="")
+        for col in range(self.board.shape[1]):
+            print(f"{col:2d}", end=" ")
+        print()
+        for row in range(self.board.shape[0]):
+            print(f"{row:2d} ", end="")
+            for col in range(self.board.shape[1]):
+                print(f"{int(self.board[row, col]):2d}", end=" ")
+            print()
     
     def toTensor(self, device=torch.device('cpu'), player=None):
         board = self.board

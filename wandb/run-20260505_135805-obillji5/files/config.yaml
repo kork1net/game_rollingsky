@@ -1,0 +1,61 @@
+_wandb:
+    value:
+        cli_version: 0.26.1
+        e:
+            6iwf0usuhh08g1b7ummzrufxgkru8dxs:
+                codePath: Trainer.py
+                codePathLocal: Trainer.py
+                cpu_count: 14
+                cpu_count_logical: 20
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "999233155072"
+                        used: "857168003072"
+                email: korkinet11122@gmail.com
+                executable: C:\Users\Koren\AppData\Local\Programs\Python\Python312\python.exe
+                git:
+                    commit: 374aff523a8fd261d696d7b647959a32b759390b
+                    remote: https://github.com/kork1net/game_rollingsky.git
+                gpu: NVIDIA GeForce RTX 4060
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 3072
+                      memoryTotal: "8585740288"
+                      name: NVIDIA GeForce RTX 4060
+                      uuid: GPU-46259892-4938-0b0b-7e0e-ab5610d467a7
+                host: Koren-Pc
+                memory:
+                    total: "17002409984"
+                os: Windows-11-10.0.26200-SP0
+                program: c:\Users\Koren\New\game_rollingsky\Trainer.py
+                python: CPython 3.12.4
+                root: C:\Users\Koren\New\game_rollingsky
+                startedAt: "2026-05-05T10:58:05.283192Z"
+                writerId: 6iwf0usuhh08g1b7ummzrufxgkru8dxs
+        m: []
+        python_version: 3.12.4
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 16
+            "4": 3.12.4
+            "5": 0.26.1
+            "8":
+                - 3
+            "12": 0.26.1
+            "13": windows-amd64
+C:
+    value: 2000
+batch:
+    value: 32
+epochs:
+    value: 500000
+gamma:
+    value: 0.99
+lr:
+    value: 0.0005

@@ -1,0 +1,8 @@
+saving training to: data\run_043.pth
+Traceback (most recent call last):
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 188, in <module>
+    main()
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 122, in main
+    torch.tensor([[reward]], device=device, dtype=torch.float32),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: must be real number, not NoneType

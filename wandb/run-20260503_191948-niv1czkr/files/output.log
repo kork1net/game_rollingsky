@@ -1,0 +1,42 @@
+saving training to: data\run_035.pth
+Epoch: 0 | Score: 1 | Best Score: 1 | Step: 6
+Epoch: 1 | Score: 3 | Best Score: 3 | Step: 15
+Epoch: 2 | Score: 1 | Best Score: 3 | Step: 6
+Epoch: 3 | Score: 2 | Best Score: 3 | Step: 14
+Epoch: 4 | Score: 0 | Best Score: 3 | Step: 2
+Epoch: 5 | Score: 1 | Best Score: 3 | Step: 6
+Epoch: 6 | Score: 0 | Best Score: 3 | Step: 4
+Traceback (most recent call last):
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 189, in <module>
+    main()
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 138, in main
+    q_values = Q(states)
+               ^^^^^^^^^
+  File "c:\Users\Koren\New\game_rollingsky\DQN.py", line 57, in __call__
+    return self.forward(states)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Koren\New\game_rollingsky\DQN.py", line 38, in forward
+    x = self.conv(x)
+        ^^^^^^^^^^^^
+  File "C:\Users\Koren\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Koren\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Koren\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "C:\Users\Koren\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Koren\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Koren\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\conv.py", line 554, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Koren\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\conv.py", line 549, in _conv_forward
+    return F.conv2d(
+           ^^^^^^^^^
+RuntimeError: Given groups=1, weight of size [16, 2, 3, 3], expected input[64, 3, 12, 12] to have 2 channels, but got 3 channels instead

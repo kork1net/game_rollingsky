@@ -1,0 +1,40 @@
+{
+  "os":  "Windows-11-10.0.26200-SP0",
+  "python":  "CPython 3.12.4",
+  "startedAt":  "2026-05-03T16:25:26.433669Z",
+  "program":  "c:\\Users\\Koren\\New\\game_rollingsky\\Trainer.py",
+  "codePath":  "Trainer.py",
+  "codePathLocal":  "Trainer.py",
+  "git":  {
+    "remote":  "https://github.com/kork1net/game_rollingsky.git",
+    "commit":  "374aff523a8fd261d696d7b647959a32b759390b"
+  },
+  "email":  "korkinet11122@gmail.com",
+  "root":  "C:\\Users\\Koren\\New\\game_rollingsky",
+  "host":  "Koren-Pc",
+  "executable":  "C:\\Users\\Koren\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "cpu_count":  14,
+  "cpu_count_logical":  20,
+  "gpu":  "NVIDIA GeForce RTX 4060",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "999233155072",
+      "used":  "866682552320"
+    }
+  },
+  "memory":  {
+    "total":  "17002409984"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 4060",
+      "memoryTotal":  "8585740288",
+      "cudaCores":  3072,
+      "architecture":  "Ada",
+      "uuid":  "GPU-46259892-4938-0b0b-7e0e-ab5610d467a7"
+    }
+  ],
+  "cudaVersion":  "13.1",
+  "writerId":  "0m4o4nc5uv8eedi5ypic37r2thb3mxn2"
+}
