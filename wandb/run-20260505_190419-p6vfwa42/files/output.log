@@ -1,0 +1,18 @@
+saving training to: data/run_048.pth
+c:\Users\Koren\New\game_rollingsky\Trainer.py:78: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(checkpoint_path, map_location=device)
+Traceback (most recent call last):
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 190, in <module>
+    main()
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 80, in main
+    player.DQN.load_state_dict(checkpoint['model_state_dict'])
+  File "C:\Users\Koren\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 2584, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for DQN:
+	size mismatch for conv.0.weight: copying a param with shape torch.Size([16, 2, 3, 3]) from checkpoint, the shape in current model is torch.Size([32, 2, 3, 3]).
+	size mismatch for conv.0.bias: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for conv.2.weight: copying a param with shape torch.Size([32, 16, 3, 3]) from checkpoint, the shape in current model is torch.Size([64, 32, 3, 3]).
+	size mismatch for conv.2.bias: copying a param with shape torch.Size([32]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for fc.1.weight: copying a param with shape torch.Size([128, 4608]) from checkpoint, the shape in current model is torch.Size([256, 9216]).
+	size mismatch for fc.1.bias: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([256]).
+	size mismatch for fc.3.weight: copying a param with shape torch.Size([3, 128]) from checkpoint, the shape in current model is torch.Size([3, 256]).

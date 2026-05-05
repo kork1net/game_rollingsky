@@ -1,0 +1,11 @@
+saving training to: data/run_048.pth
+Traceback (most recent call last):
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 189, in <module>
+    main()
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 109, in main
+    action = player.action(state=state, epoch=total_steps)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Koren\New\game_rollingsky\DQN_agent.py", line 54, in action
+    state_tensor = state_tensor.view(1, 5, 12, 12).to(device)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: shape '[1, 5, 12, 12]' is invalid for input of size 288

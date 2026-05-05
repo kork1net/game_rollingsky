@@ -71,7 +71,7 @@ def main():
 
     optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
 
-    checkpoint_path = 'data/run_047.pth'
+    checkpoint_path = 'data/run_048.pth'
     print("saving training to:", checkpoint_path)
     
     if os.path.exists(checkpoint_path):
@@ -87,9 +87,8 @@ def main():
     player_hat.DQN = Q_hat
 
     replay = ReplayBuffer()
-
     best_score = 0
-
+    total_steps = 0
 
     #endregion   
 
@@ -126,6 +125,7 @@ def main():
 
             state = next_state
             state_tensor = next_state_tensor.float()
+            total_steps += 1
 
             if len(replay) >= batch:
 
@@ -142,7 +142,10 @@ def main():
                 q_sa = q_values.gather(1, actions_idx).squeeze(1)
                 
                 with torch.no_grad():
-                    q_next = Q_hat(next_states).max(1)[0]
+                    next_actions = Q(next_states).argmax(dim=1, keepdim=True)
+
+                    q_next = Q_hat(next_states).gather(1, next_actions).squeeze(1)
+
                     target = rewards + gamma * q_next * (1 - dones)
 
                 loss = torch.nn.functional.mse_loss(q_sa, target)
@@ -163,7 +166,7 @@ def main():
                 #     epsilon = player.epsilon_greedy(epoch)
                 #     print(f"Step: {env.step} | Loss: {loss.item():.4f} | Epsilon: {epsilon:.4f} | Avg Reward: {rewards.mean().item():.4f}")
 
-            if env.step % C == 0:
+            if total_steps % C == 0:
                 Q_hat.load_state_dict(Q.state_dict())
             
             if env.render:

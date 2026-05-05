@@ -18,18 +18,18 @@ class DQN(nn.Module):
 
 
         self.conv = nn.Sequential(
-            nn.Conv2d(2, 16, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(2, 64, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
-            nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
             nn.ReLU()
         )
 
 
         self.fc = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(32 * 12 * 12, 128),
+            nn.Linear(128 * 12 * 12, 512),
             nn.ReLU(),
-            nn.Linear(128, num_actions)
+            nn.Linear(512, num_actions)
         )
 
 

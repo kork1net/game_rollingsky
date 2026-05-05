@@ -52,7 +52,7 @@ class Enviroment:
         self.touched_boost3 = False
 
         self.jumpduration = 35
-        self.spike_frequency = 30 # lower -> more spikes
+        self.spike_frequency = 50 # lower -> more spikes
         self.jumper_frequency = 8
 
         self.score = 0
@@ -294,10 +294,7 @@ class Enviroment:
         #     self.state.board[0, col] = 8
 
     def reset(self):
-        self.__init__(self.state, render=self.render)
-        self.state.board = self.state.init_board()
-        self.player.broken = False
-        self.died_from_spike = False  # Reset spike death flag
+        self.__init__(State(), render=self.render)
         return self.state
 
 
@@ -381,32 +378,34 @@ class Enviroment:
 
     def get_reward(self):
         if self.game_over:
-            return -50
+            return -1.0
+        
+        # Base survival reward
         reward = 0.5
+        
+        # Score-based reward (encourages progress)
+        reward += self.score * 0.001
 
         row = self.player.row
         col = self.player.col
         board = self.state.board
 
-        # i = 0
-        # tilex = self.player.col
+        if row - 1 >= 0:
+            if board[row-1, col] == 1:
+                reward += 0.1
+            elif board[row-1, col] == 0 or board[row-1, col] == 2:
+                reward -= 0.5
 
-        # while i < 7:
-        #     if self.state.board[self.player.row-2, i] == 1:
-        #         tilex = i
-        #         break
-        #     i += 1
-
-        # center_col = tilex + 1.5
-        # dist = abs(self.player.col - center_col)
-
-        # reward -= 0.5 * dist
-
-        if row - 1 >= 0 and board[row - 1, col] == 2:
-            reward -= 8.0
-
-        if row - 2 >= 0 and board[row - 2, col] == 2:
-            reward -= 4.0
+        look_row = max(row - 2, 0)
+        tilex = col
+        for i in range(7):
+            if board[look_row, i] == 1:
+                tilex = i
+                break
+        center_col = tilex + 1.5
+        dist = abs(col - center_col)
+        center_reward = max(0.0, 1.0 - dist / 2.0)
+        reward += 0.3 * center_reward
 
 
         return reward

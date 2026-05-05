@@ -38,7 +38,7 @@ class State:
                 print(f"{int(self.board[row, col]):2d}", end=" ")
             print()
     
-    def toTensor(self, device=torch.device('cpu'), player=None):
+    def toTensor(self, device=torch.device('cpu'), player=None, env=None):
         board = self.board
 
         if player is not None:
@@ -63,8 +63,6 @@ class State:
             # stack board and player position channels
             board = np.stack([board, player_channel], axis=0)
             tensor = torch.tensor(board, dtype=torch.float32, device=device)
-
-            
             return tensor.unsqueeze(0)
         else:
             tensor = torch.tensor(board, dtype=torch.float32, device=device)
