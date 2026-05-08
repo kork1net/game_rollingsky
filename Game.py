@@ -1,7 +1,7 @@
 import pygame
 import torch
 from Graphics import *
-from Enviroment import Enviroment
+from Environment import Environment
 from State import State
 from Human_agent import Human_agent
 from Random_agent import Random_agent
@@ -13,25 +13,24 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 pygame.init()
 clock = pygame.time.Clock()
 graphics = Graphics()
-env = Enviroment(State())
+env = Environment(State())
 
-player = Human_agent()
-# player = DQN_agent(env=env, train=True)
+human_player = Human_agent()
+ai_player = DQN_agent(env=env, train=False)
 
-checkpoint_path = "data/run_005.pth"
+checkpoint_path = "data/run_048.pth"
 
-if isinstance(player, DQN_agent):
-    if os.path.exists(checkpoint_path):
-        checkpoint = torch.load(checkpoint_path, map_location=device)
-        player.DQN.load_state_dict(checkpoint['model_state_dict'])
-        print("Loaded trained model")
-    else:
-        print("No trained model found")
+if os.path.exists(checkpoint_path):
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    ai_player.DQN.load_state_dict(checkpoint['model_state_dict'])
+    print("Loaded trained model")
+else:
+    print("No trained model found")
 
-try:
-    player.DQN.to(device)
-except Exception:
-    pass
+ai_player.DQN.to(device)
+
+player = ai_player  # start with AI
+current_player = 'ai'
 
 
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
@@ -74,8 +73,10 @@ def main():
 
         if not start:
             graphics.main_img_call(False)
-            graphics.draw_text("Press [space]", restart_font, ('black'), 75, 483)
-            graphics.draw_text("Press [space]", restart_font, ('white'), 75, 480)
+            graphics.draw_text("[space] for Human", restart_font, ('black'), 25, 483)
+            graphics.draw_text("[space] for Human", restart_font, ('white'), 25, 480)
+            graphics.draw_text("[a] for AI", restart_font, ('black'), 110, 543)
+            graphics.draw_text("[a] for AI", restart_font, ('white'), 110, 540)
            
             for event in events:
                     if event.type == pygame.KEYDOWN:
@@ -83,6 +84,19 @@ def main():
                             env.reset()
                             env.play_start_sound()
                             start = True
+                            player = human_player
+                            humanEnv = False
+                            current_player = 'human'
+                        elif event.key == pygame.K_a:
+                            env.reset()
+                            env.play_start_sound()
+                            start = True
+                            player = ai_player
+                            humanEnv = True
+                            current_player = 'ai'
+  
+
+                            
         if start:
             graphics.main_img_call(True)
            
@@ -98,10 +112,19 @@ def main():
                             env.pause = False
                             pygame.mixer.music.unpause()
 
+                        elif event.key == pygame.K_SPACE:
+                            player = human_player
+                            humanEnv = False
+                            current_player = 'human'
+                        elif event.key == pygame.K_a:
+                            player = ai_player
+                            humanEnv = True
+                            current_player = 'ai'
+
 
             if not env.game_over and not env.pause:
                 action = player.action(state=env.state, events=events)
-                env.move(action)
+                env.move(action, humanEnv)
            
             if env.game_over:
 
@@ -110,8 +133,8 @@ def main():
                 graphics.draw_text("Game Over!", death_font, ('white'), 20, 300)
 
 
-                graphics.draw_text("[space] to restart", restart_font, ('red'), 10, 373)
-                graphics.draw_text("[space] to restart", restart_font, ('white'), 10, 370)
+                graphics.draw_text("[r] to restart", restart_font, ('red'), 54, 373)
+                graphics.draw_text("[r] to restart", restart_font, ('white'), 54, 370)
 
 
                 pygame.mixer.music.stop()
@@ -119,7 +142,7 @@ def main():
 
                 for event in events:
                     if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_SPACE:
+                        if event.key == pygame.K_r:
                             env.reset()
                             if (graphics.sound_state == 0):
                                 pygame.mixer.music.unpause()
@@ -130,7 +153,7 @@ def main():
 
 
             graphics.draw_text("SCORE:"+str(env.score), text_font, ('white'), 12, 18)
-            graphics.draw_text("Player", restart_font, ('black'), 10, 685)
+            graphics.draw_text(f"{current_player}", restart_font, ('white'), 5, 685)
 
 
         pygame.display.update()

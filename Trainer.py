@@ -1,7 +1,7 @@
 
 import pygame
 from Graphics import *
-from Enviroment import Enviroment
+from Environment import Environment
 from State import State
 from DQN_agent import DQN_agent
 from DQN import DQN
@@ -14,7 +14,7 @@ import wandb
 pygame.init()
 clock = pygame.time.Clock()
 graphics = Graphics()
-env = Enviroment(State())
+env = Environment(State())
 
 text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 30)
 small_text_font = pygame.font.Font("fonts/pressstart2p-regular.ttf", 25)
@@ -58,7 +58,7 @@ def main():
     }
     )
 
-    env = Enviroment(State(), render=True)
+    env = Environment(State(), render=True, enable_sfx=False)
 
     player = DQN_agent(env=env, train=True)
     player.DQN.to(device)

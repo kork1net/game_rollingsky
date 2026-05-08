@@ -14,10 +14,11 @@ slime_sound = pygame.mixer.Sound("sfx/slimes.mp3")
 jump_sound = pygame.mixer.Sound("sfx/jumps.mp3")
 start_sound = pygame.mixer.Sound("sfx/starts.mp3")
 
-class Enviroment:
-    def __init__(self, state, speed = 10, render=False):
+class Environment:
+    def __init__(self, state, speed = 10, render=False, enable_sfx=True):
 
         self.render = render
+        self.enable_sfx = enable_sfx
         self.state : State = state
         self.player = Player()
         
@@ -46,6 +47,7 @@ class Enviroment:
         self.played_slime_sound = False
         self.played_jump_sound = False
         self.played_bonus_sound = False
+        self.played_death_sound = False
 
         self.touched_boost = False
         self.touched_boost2 = False
@@ -62,7 +64,8 @@ class Enviroment:
         self.died_from_spike = False  # Track if death was caused by spike
     
     def play_start_sound(self):
-        start_sound.play()
+        if self.enable_sfx:
+            start_sound.play()
 
     def move (self, action, is_agent=False):
 
@@ -152,92 +155,119 @@ class Enviroment:
                 self.game_over = True
                 self.died_from_spike = False
                 self.player.broken = True
+                if not self.played_death_sound and self.enable_sfx:
+                    death.play()
+                    self.played_death_sound = True
 
         elif tile_id == 2:  # ספייק (Spike)
             if not self.jumping:
                 self.game_over = True
                 self.died_from_spike = True  # Track that death was from spike
                 self.player.broken = True
+                if not self.played_death_sound and self.enable_sfx:
+                    death.play()
+                    self.played_death_sound = True
 
         elif tile_id == 3:  # בוסט
             if not self.jumping:
                 self.boost = True
                 self.boost_counter = 0
                 self.slow = False
+                if not self.played_boost_sound and self.enable_sfx:
+                    boost_sound.play()
+                    self.played_boost_sound = True
 
         elif tile_id == 4:  # סליים
             if not self.jumping:
                 self.slow = True
                 self.slow_counter = 0
                 self.boost = False
+                if not self.played_slime_sound and self.enable_sfx:
+                    slime_sound.play()
+                    self.played_slime_sound = True
 
         elif tile_id == 5:  # ג'אמפר
             self.jumping = True
             self.jumping_counter = 0
+            if not self.played_jump_sound and self.enable_sfx:
+                jump_sound.play()
+                self.played_jump_sound = True
 
         elif tile_id == 6:
             if not self.jumping and not self.touched_boost:
                 self.score += 200
+                if not self.played_bonus_sound:
+                    bonus_sound.play()
+                    self.played_bonus_sound = True
             self.touched_boost = True
 
         elif tile_id == 7:
             if not self.jumping and not self.touched_boost2:
                 self.score += 1000
+                if not self.played_bonus_sound:
+                    bonus_sound.play()
+                    self.played_bonus_sound = True
             self.touched_boost2 = True
         
         elif tile_id == 8:
             if not self.jumping and not self.touched_boost3:
                 self.score += 3000
+                if not self.played_bonus_sound:
+                    bonus_sound.play()
+                    self.played_bonus_sound = True
             self.touched_boost3 = True
 
         else:
             self.touched_boost = False
             self.touched_boost2 = False
             self.touched_boost3 = False
+            self.played_boost_sound = False
+            self.played_slime_sound = False
+            self.played_jump_sound = False
+            self.played_bonus_sound = False
 
     def play_sound(self, col, row, board):
+        if not self.render or not self.enable_sfx:
+            return
 
-        return
+        if board[row, col] == 0 or board[row, col] == 2:
+            if (not self.jumping):
+                if not self.played_spike_sound:
+                    death.play()
+                self.played_spike_sound = True
+        else:
+            self.played_spike_sound = False
 
-        if self.render:
-            if board[row, col] == 0 or board[row, col] == 2:
-                if (not self.jumping):
-                    if not self.played_spike_sound:
-                        death.play()
-                    self.played_spike_sound = True
-            else:
-                self.played_spike_sound = False
-
-            if board[row, col] == 3: # boost
-                if (not self.jumping):
-                    if not self.played_boost_sound:
-                        boost_sound.play()
-                    self.played_boost_sound = True
-            else:
-                self.played_boost_sound = False
+        if board[row, col] == 3: # boost
+            if (not self.jumping):
+                if not self.played_boost_sound:
+                    boost_sound.play()
+                self.played_boost_sound = True
+        else:
+            self.played_boost_sound = False
             
-            if board[row, col] == 4: # slime
-                if (not self.jumping):
-                    if not self.played_slime_sound:
-                        slime_sound.play()
-                    self.played_slime_sound = True
-            else:
-                self.played_slime_sound = False
+        if board[row, col] == 4: # slime
+            if (not self.jumping):
+                if not self.played_slime_sound:
+                    slime_sound.play()
+                self.played_slime_sound = True
+        else:
+            self.played_slime_sound = False
 
-            if board[row, col] == 5: # jumper
-                if not self.played_jump_sound:
-                    jump_sound.play()
-                self.played_jump_sound = True
-            else:
-                self.played_jump_sound = False
+        if board[row, col] == 5: # jumper
+            if not self.played_jump_sound:
+                jump_sound.play()
+            self.played_jump_sound = True
+        else:
+            self.played_jump_sound = False
             
-            if board[row, col] == 6 or board[row, col] == 7 or board[row, col] == 8: # bonus
-                if (not self.jumping):
-                    if not self.played_bonus_sound:
-                        bonus_sound.play()
-                    self.played_bonus_sound = True
-            else:
-                self.played_bonus_sound = False
+        if board[row, col] == 6 or board[row, col] == 7 or board[row, col] == 8: # bonus
+            if (not self.jumping):
+                if not self.played_bonus_sound:
+                    bonus_sound.play()
+                self.played_bonus_sound = True
+        else:
+            self.played_bonus_sound = False
         return
 
     def _is_spike_safe(self, col):
@@ -273,28 +303,25 @@ class Enviroment:
             self.state.board[0, col] = 4
 
     def add_bonus200(self):
-        pass
-        # delay = random.randint(5, 700)
-        # if self.step % delay == 0:
-        #     col = random.randint(self.wait, self.wait + 3)
-        #     self.state.board[0, col] = 6
+        delay = random.randint(5, 700)
+        if self.step % delay == 0:
+            col = random.randint(self.wait, self.wait + 3)
+            self.state.board[0, col] = 6
 
     def add_bonus1000(self):
-        pass
-        # delay = random.randint(5, 15000)
-        # if self.step % delay == 0:
-        #     col = random.randint(self.wait, self.wait + 3)
-        #     self.state.board[0, col] = 7
+        delay = random.randint(5, 15000)
+        if self.step % delay == 0:
+            col = random.randint(self.wait, self.wait + 3)
+            self.state.board[0, col] = 7
 
     def add_bonus3000(self):
-        pass
-        # delay = random.randint(5, 36000)
-        # if self.step % delay == 0:
-        #     col = random.randint(self.wait, self.wait + 3)
-        #     self.state.board[0, col] = 8
+        delay = random.randint(5, 36000)
+        if self.step % delay == 0:
+            col = random.randint(self.wait, self.wait + 3)
+            self.state.board[0, col] = 8
 
     def reset(self):
-        self.__init__(State(), render=self.render)
+        self.__init__(State(), render=self.render, enable_sfx=self.enable_sfx)
         return self.state
 
 
@@ -346,14 +373,20 @@ class Enviroment:
         # new row        
         self.state.board[0] = 0
 
+        hole = random.randint(1,2)
         self.state.board[0, self.wait:self.wait + 4] = 1
-        self.add_spikes()
         
         self.height_left -= 1
+        self.add_spikes()
 
         if self.height_left == 0:
-             
-            self.state.board[0, self.wait:self.wait + 4] = 1
+            if(hole == 1):
+                jumper_tile = random.randint(self.wait, self.wait + 3) 
+                self.state.board[0, self.wait:self.wait + 4] = 0 # empty row
+                self.state.board[1, jumper_tile] = 5 # place a jumper                
+            else:
+                self.state.board[0, self.wait:self.wait + 4] = 1
+                self.add_spikes()
 
             new_wait = self.wait + self.direction
 
@@ -393,8 +426,25 @@ class Enviroment:
         if row - 1 >= 0:
             if board[row-1, col] == 1:
                 reward += 0.1
+            elif board[row-1, col] == 5:
+                reward += 3.0
             elif board[row-1, col] == 0 or board[row-1, col] == 2:
                 reward -= 0.5
+
+        if board[row, col] == 5:
+            reward += 8.0
+
+        for ahead in range(1, 4):
+            check_row = row - ahead
+            if check_row >= 0:
+                jumper_cols = [c for c in range(board.shape[1]) if board[check_row, c] == 5]
+
+                if len(jumper_cols) > 0:
+                    nearest_jumper = min(jumper_cols, key=lambda c: abs(c - col))
+                    dist_to_jumper = abs(col - nearest_jumper)
+
+                    reward += max(0.0, 1.0 - dist_to_jumper / 3.0) * 2.0
+                    break
 
         look_row = max(row - 2, 0)
         tilex = col
@@ -409,9 +459,3 @@ class Enviroment:
 
 
         return reward
-
-
-    
-
-
-    

@@ -1,0 +1,21 @@
+2026-05-07 13:00:56,297 INFO    MainThread:14396 [wandb_setup.py:_flush():81] Current SDK version is 0.26.1
+2026-05-07 13:00:56,297 INFO    MainThread:14396 [wandb_setup.py:_flush():81] Configure stats pid to 14396
+2026-05-07 13:00:56,297 INFO    MainThread:14396 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-05-07 13:00:56,297 INFO    MainThread:14396 [wandb_init.py:setup_run_log_directory():723] Logging user logs to C:\Users\Koren\New\game_rollingsky\wandb\run-20260507_130056-b8h4r8xd\logs\debug.log
+2026-05-07 13:00:56,297 INFO    MainThread:14396 [wandb_init.py:setup_run_log_directory():724] Logging internal logs to C:\Users\Koren\New\game_rollingsky\wandb\run-20260507_130056-b8h4r8xd\logs\debug-internal.log
+2026-05-07 13:00:56,297 INFO    MainThread:14396 [wandb_init.py:init():850] calling init triggers
+2026-05-07 13:00:56,297 INFO    MainThread:14396 [wandb_init.py:init():855] wandb.init called with sweep_config: {}
+config: {'epochs': 500000, 'batch': 32, 'lr': 0.0005, 'gamma': 0.99, 'C': 2000, '_wandb': {}}
+2026-05-07 13:00:56,297 INFO    MainThread:14396 [wandb_init.py:init():898] starting backend
+2026-05-07 13:00:58,659 INFO    MainThread:14396 [wandb_init.py:init():913] sending inform_init request
+2026-05-07 13:00:59,061 INFO    MainThread:14396 [wandb_init.py:init():918] backend started and connected
+2026-05-07 13:00:59,080 INFO    MainThread:14396 [wandb_init.py:init():988] updated telemetry
+2026-05-07 13:00:59,106 INFO    MainThread:14396 [wandb_init.py:init():1011] communicating run to backend with 90.0 second timeout
+2026-05-07 13:00:59,602 INFO    MainThread:14396 [wandb_init.py:init():1056] starting run threads in backend
+2026-05-07 13:00:59,687 INFO    MainThread:14396 [wandb_run.py:_console_start():2554] atexit reg
+2026-05-07 13:00:59,687 INFO    MainThread:14396 [wandb_run.py:_redirect():2403] redirect: wrap_raw
+2026-05-07 13:00:59,688 INFO    MainThread:14396 [wandb_run.py:_redirect():2472] Wrapping output streams.
+2026-05-07 13:00:59,688 INFO    MainThread:14396 [wandb_run.py:_redirect():2495] Redirects installed.
+2026-05-07 13:00:59,690 INFO    MainThread:14396 [wandb_init.py:init():1094] run started, returning control to user process
+2026-05-07 13:22:47,467 INFO    wandb-AsyncioManager-main:14396 [service_client.py:_forward_responses():134] Reached EOF.
+2026-05-07 13:22:47,467 INFO    wandb-AsyncioManager-main:14396 [mailbox.py:close():155] Closing mailbox, abandoning 1 handles.

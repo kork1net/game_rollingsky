@@ -2,7 +2,7 @@ import torch
 import numpy as np
 import math
 import random
-from Enviroment import Enviroment
+from Environment import Environment
 from State import State
 from DQN import DQN
 

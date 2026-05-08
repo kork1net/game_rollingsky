@@ -1,0 +1,16 @@
+saving training to: data/run_049.pth
+c:\Users\Koren\New\game_rollingsky\Trainer.py:78: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(checkpoint_path, map_location=device)
+Epoch: 861 | Score: 128 | Best Score: 128 | Step: 642
+Epoch: 862 | Score: 69 | Best Score: 128 | Step: 347
+Epoch: 863 | Score: 108 | Best Score: 128 | Step: 542
+Epoch: 864 | Score: 79 | Best Score: 128 | Step: 397
+Epoch: 865 | Score: 26 | Best Score: 128 | Step: 133
+Epoch: 866 | Score: 25 | Best Score: 128 | Step: 128
+Epoch: 867 | Score: 124 | Best Score: 128 | Step: 622
+Epoch: 868 | Score: 41 | Best Score: 128 | Step: 207
+Epoch: 869 | Score: 131 | Best Score: 131 | Step: 657
+Epoch: 870 | Score: 30 | Best Score: 131 | Step: 151
+Epoch: 871 | Score: 26 | Best Score: 131 | Step: 132
+Epoch: 872 | Score: 99 | Best Score: 131 | Step: 497
+Epoch: 873 | Score: 47 | Best Score: 131 | Step: 237

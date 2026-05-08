@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 191, in <module>
+    main()
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 74, in main
+    checkpoint_path = get_new_run_path()
+                      ^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Koren\New\game_rollingsky\Trainer.py", line 25, in get_new_run_path
+    int(f.split("_")[1].split(".")[0])
+ValueError: invalid literal for int() with base 10: '048 copy'
