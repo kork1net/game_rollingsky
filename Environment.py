@@ -440,7 +440,7 @@ class Environment:
                 jumper_cols = [c for c in range(board.shape[1]) if board[check_row, c] == 5]
 
                 if len(jumper_cols) > 0:
-                    nearest_jumper = min(jumper_cols, key=lambda c: abs(c - col))
+                    nearest_jumper = min(jumper_cols, key=lambda c: abs(c - col)) 
                     dist_to_jumper = abs(col - nearest_jumper)
 
                     reward += max(0.0, 1.0 - dist_to_jumper / 3.0) * 2.0
